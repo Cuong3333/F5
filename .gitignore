@@ -1,0 +1,5 @@
+# Bỏ qua thư mục môi trường ảo .venv
+.venv/
+
+# Bỏ qua file .env (lưu trữ các biến môi trường)
+.env
