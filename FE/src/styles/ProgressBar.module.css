@@ -1,0 +1,16 @@
+/* src/styles/ProgressBar.module.css */
+.progressContainer {
+  width: 100%;
+  background-color: #333;
+}
+
+.progressBar {
+  height: 8px;
+  background-color: #666;
+}
+
+.progressFill {
+  width: 50%; /* Giả sử đang ở giữa tiến trình */
+  height: 100%;
+  background-color: #4CAF50;
+}
