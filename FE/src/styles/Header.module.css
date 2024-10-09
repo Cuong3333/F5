@@ -1,0 +1,26 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #4CAF50;
+  }
+  
+  .logo {
+    font-size: 24px;
+    color: white;
+  }
+  
+  .navLinks {
+    list-style: none;
+    display: flex;
+  }
+  
+  .navLinks li {
+    margin: 0 10px;
+  }
+  
+  .navLinks a {
+    color: white;
+    text-decoration: none;
+  }
+  
