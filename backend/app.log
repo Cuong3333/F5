@@ -1,0 +1,144 @@
+2024-10-24 12:21:55,829 - INFO - Starting API....
+2024-10-24 12:22:46,399 - INFO - User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1
+2024-10-24 12:22:46,634 - INFO - User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1
+2024-10-24 12:47:58,168 - INFO - Starting API....
+2024-10-24 12:48:22,593 - INFO - Starting API....
+2024-10-24 12:48:31,721 - INFO - Starting API....
+2024-10-24 12:49:03,667 - INFO - Starting API....
+2024-10-24 12:49:53,172 - INFO - Starting API....
+2024-10-24 12:50:39,770 - INFO - Starting API....
+2024-10-24 12:50:42,134 - INFO - Starting API....
+2024-10-24 13:11:34,732 - INFO - Starting API....
+2024-10-24 13:12:29,618 - INFO - User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1
+2024-10-24 13:12:29,857 - INFO - User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1
+2024-10-24 13:12:47,917 - INFO - User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1
+2024-10-24 13:12:48,129 - INFO - User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1
+2024-10-24 13:13:33,057 - INFO - Starting API....
+2024-10-24 13:13:38,080 - INFO - Starting API....
+2024-10-24 13:14:04,960 - INFO - User 'user@example.com' đang cố gắng đăng nhập từ 127.0.0.1
+2024-10-24 13:14:04,966 - WARNING - Không đăng nhập được cho người dùng 'user@example.com': Không tìm thấy người dùng
+2024-10-24 13:14:18,875 - INFO - User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1
+2024-10-24 13:14:19,109 - INFO - User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1
+2024-10-24 13:14:40,766 - INFO - User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1
+2024-10-24 13:14:41,006 - INFO - User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1
+2024-10-24 13:14:54,186 - INFO - User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1
+2024-10-24 13:14:54,399 - INFO - User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1
+2024-10-24 13:15:26,604 - INFO - Starting API....
+2024-10-24 13:15:40,174 - INFO - Starting API....
+2024-10-24 13:16:15,247 - INFO - Starting API.... 
+2024-10-24 13:16:24,120 - INFO - Starting API.... Starting API....
+2024-10-24 13:17:21,835 - INFO - User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1 - 127.0.0.1 - POST - 200
+{"asctime": "2024-10-24 13:22:40,426", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:22:45,407", "levelname": "INFO", "message": "User 'user123@example.com' \u0111ang c\u1ed1 g\u1eafng \u0111\u0103ng nh\u1eadp t\u1eeb 127.0.0.1", "ip_address": null, "method": null, "status_code": null, "taskName": null}
+{"asctime": "2024-10-24 13:22:45,676", "levelname": "INFO", "message": "User 'user123@example.com' \u0111\u00e3 \u0111\u0103ng nh\u1eadp th\u00e0nh c\u00f4ng t\u1eeb 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200, "taskName": null, "username": "user123@example.com"}
+{"asctime": "2024-10-24 13:28:39,594", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:29:09,148", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:29:11,172", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:29:44,657", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:30:10,010", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:30:15,856", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:30:48,015", "levelname": "INFO", "message": "User 'user123@example.com' \u0111ang c\u1ed1 g\u1eafng \u0111\u0103ng nh\u1eadp t\u1eeb 127.0.0.1", "ip_address": null, "method": null, "status_code": null, "taskName": null}
+{"asctime": "2024-10-24 13:30:48,249", "levelname": "INFO", "message": "User 'user123@example.com' \u0111\u00e3 \u0111\u0103ng nh\u1eadp th\u00e0nh c\u00f4ng t\u1eeb 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200, "taskName": null, "username": "user123@example.com"}
+{"asctime": "2024-10-24 13:30:56,716", "levelname": "INFO", "message": "User 'user123@example.com' \u0111ang c\u1ed1 g\u1eafng \u0111\u0103ng nh\u1eadp t\u1eeb 127.0.0.1", "ip_address": null, "method": null, "status_code": null, "taskName": null}
+{"asctime": "2024-10-24 13:30:56,932", "levelname": "INFO", "message": "User 'user123@example.com' \u0111\u00e3 \u0111\u0103ng nh\u1eadp th\u00e0nh c\u00f4ng t\u1eeb 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200, "taskName": null, "username": "user123@example.com"}
+{"asctime": "2024-10-24 13:34:11,746", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:35:15,077", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:35:27,225", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:35:29,414", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:35:34,114", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:35:39,453", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:35:49,450", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:35:53,635", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:36:10,050", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:36:20,341", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:36:25,049", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:36:29,420", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:36:52,390", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:37:17,113", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:37:33,309", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:37:36,775", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:37:52,259", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:37:56,282", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:37:58,417", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:38:05,109", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:38:07,249", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:38:10,588", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:38:13,515", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:38:24,936", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:40:21,314", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:40:43,665", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:40:55,683", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:41:05,161", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:41:09,928", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:41:17,230", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:41:19,971", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:41:25,284", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:41:32,389", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:41:35,475", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:41:41,521", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:41:55,598", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:42:08,875", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:48:44,579", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:49:21,485", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:49:25,690", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:49:37,934", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:49:42,074", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:49:46,133", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:49:49,068", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:50:26,591", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:50:33,141", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:50:35,949", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:50:38,169", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:50:42,561", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:50:45,514", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:50:48,751", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:50:51,593", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:50:59,161", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:02,181", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:04,277", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:09,026", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:13,211", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:16,168", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:20,986", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:23,162", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:26,092", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:29,225", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:32,317", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:51:58,139", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:52:01,235", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:52:04,461", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:52:30,221", "levelname": "INFO", "message": "Request received at http://127.0.0.1:8000/brands", "ip_address": null, "method": null, "status_code": null, "taskName": null}
+{"asctime": "2024-10-24 13:52:46,433", "levelname": "INFO", "message": "Request received at http://127.0.0.1:8000/brands", "ip_address": null, "method": null, "status_code": null, "taskName": null}
+{"asctime": "2024-10-24 13:53:20,821", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:53:29,671", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:53:37,198", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:53:51,522", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:53:54,628", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null, "taskName": "Task-1"}
+{"asctime": "2024-10-24 13:54:16,131", "levelname": "INFO", "message": "Y\u00eau c\u1ea7u \u0111\u01b0\u1ee3c nh\u1eadn t\u1ea1i http://127.0.0.1:8000/brands", "ip_address": null, "method": null, "status_code": null, "taskName": null}
+{"asctime": "2024-10-24 13:54:18,341", "levelname": "INFO", "message": "Y\u00eau c\u1ea7u \u0111\u01b0\u1ee3c nh\u1eadn t\u1ea1i http://127.0.0.1:8000/brands", "ip_address": null, "method": null, "status_code": null, "taskName": null}
+{"asctime": "2024-10-24 14:02:16,563", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:02:24,526", "levelname": "INFO", "message": "Yêu cầu được nhận tại http://127.0.0.1:8000/brands", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:02:32,049", "levelname": "INFO", "message": "Yêu cầu được nhận tại http://127.0.0.1:8000/brands", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:02:35,481", "levelname": "INFO", "message": "Yêu cầu được nhận tại http://127.0.0.1:8000/brands", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:02:35,639", "levelname": "INFO", "message": "Yêu cầu được nhận tại http://127.0.0.1:8000/brands", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:02:35,764", "levelname": "INFO", "message": "Yêu cầu được nhận tại http://127.0.0.1:8000/brands", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:03:46,204", "levelname": "INFO", "message": "User 'user@example.com' đang cố gắng đăng nhập từ 127.0.0.1", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:03:46,209", "levelname": "WARNING", "message": "Không đăng nhập được cho người dùng 'user@example.com': Không tìm thấy người dùng", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:04:03,209", "levelname": "INFO", "message": "User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:04:03,449", "levelname": "INFO", "message": "User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200}
+{"asctime": "2024-10-24 14:04:21,801", "levelname": "INFO", "message": "User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:04:22,028", "levelname": "INFO", "message": "User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200}
+{"asctime": "2024-10-24 14:07:06,430", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:07:12,354", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:07:29,236", "levelname": "INFO", "message": "User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:07:29,471", "levelname": "INFO", "message": "User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200}
+{"asctime": "2024-10-24 14:08:15,100", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:08:15,676", "levelname": "INFO", "message": "User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200}
+{"asctime": "2024-10-24 14:08:15,916", "levelname": "INFO", "message": "User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200}
+{"asctime": "2024-10-24 14:10:40,955", "levelname": "INFO", "message": "User 'user123@example.com' đang cố gắng đăng nhập từ 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200}
+{"asctime": "2024-10-24 14:10:41,215", "levelname": "INFO", "message": "User 'user123@example.com' đã đăng nhập thành công từ 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200}
+{"asctime": "2024-10-24 14:11:37,498", "levelname": "INFO", "message": "User 'user1234@example.com' đang cố gắng đăng nhập từ 127.0.0.1", "ip_address": "127.0.0.1", "method": "POST", "status_code": 200}
+{"asctime": "2024-10-24 14:11:37,499", "levelname": "WARNING", "message": "Không đăng nhập được cho người dùng 'user1234@example.com': Không tìm thấy người dùng", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:21:38,594", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:21:44,256", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null}
+{"asctime": "2024-10-24 14:21:46,437", "levelname": "INFO", "message": "Starting API....", "ip_address": null, "method": null, "status_code": null}

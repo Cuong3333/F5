@@ -7,7 +7,7 @@ import os
 
 # connStr = "postgresql://postgres:0979171860sang@localhost/PostsApp"
 
-load_dotenv()
+load_dotenv(dotenv_path='./backend/.env')
 
 connStr = os.getenv('DB_HOST')
 

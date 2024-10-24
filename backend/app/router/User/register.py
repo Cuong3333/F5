@@ -17,6 +17,7 @@ def create_user(user_create: UserCreate, db: Session = Depends(get_db)):
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     
+    
     # Băm mật khẩu trước khi lưu
     hashed_password = hash_password(user_create.password)
     
