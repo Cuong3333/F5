@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 import os
 
-# connStr = "postgresql://postgres:0979171860sang@localhost/PostsApp"
+# connStr = "postgresql://postgres:Cuong2603@localhost:5432/WellGreen"
 
 load_dotenv()
 

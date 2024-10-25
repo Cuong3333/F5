@@ -1,0 +1,12 @@
+/* Icon.module.css */
+
+.icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  
+  

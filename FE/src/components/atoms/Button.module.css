@@ -1,0 +1,27 @@
+/* Button.module.css */
+.button {
+  background-color: #1c9404; /* Màu nền xanh dương */
+  color: white; /* Màu chữ trắng */
+  padding: 0.8rem 1.2rem; /* Khoảng cách bên trong nút */
+  border: none; /* Loại bỏ viền mặc định */
+  border-radius: 4px; /* Bo góc cho nút */
+  cursor: pointer; /* Con trỏ chuột dạng bàn tay khi di chuột lên nút */
+  font-size: 1rem; /* Kích thước chữ */
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu khi rê chuột */
+}
+
+/* Hiệu ứng khi người dùng rê chuột vào nút */
+.button:hover {
+  background-color: #0dec20; /* Thay đổi màu nền khi rê chuột */
+}
+
+/* Kiểu CSS bổ sung nếu cần, ví dụ như kích thước khác nhau */
+.button.small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+.button.large {
+  padding: 1rem 1.5rem;
+  font-size: 1.2rem;
+}

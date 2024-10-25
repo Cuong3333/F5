@@ -1,0 +1,31 @@
+.introduction {
+    text-align: center; /* Canh giữa nội dung */
+    margin-top: 50px; /* Khoảng cách trên */
+  }
+  
+  .introduction h2 {
+    font-size: 32px; /* Kích thước chữ cho tiêu đề */
+    color: #333; /* Màu chữ */
+  }
+  
+  .introduction p {
+    font-size: 18px; /* Kích thước chữ cho đoạn văn */
+    color: #666; /* Màu chữ cho đoạn văn */
+    margin: 20px 0; /* Khoảng cách giữa các đoạn */
+  }
+  
+  .ctaButton {
+    padding: 15px 30px; /* Padding cho nút CTA */
+    background-color: #007bff; /* Màu nền cho nút */
+    color: white; /* Màu chữ cho nút */
+    border: none; /* Không có border */
+    border-radius: 5px; /* Bo góc */
+    font-size: 20px; /* Kích thước chữ cho nút */
+    cursor: pointer; /* Con trỏ khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+  }
+  
+  .ctaButton:hover {
+    background-color: #0056b3; /* Màu khi hover */
+  }
+  

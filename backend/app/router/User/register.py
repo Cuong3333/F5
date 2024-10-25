@@ -15,7 +15,8 @@ def create_user(user_create: UserCreate, db: Session = Depends(get_db)):
     # Kiểm tra xem email đã tồn tại chưa
     existing_user = db.query(User).filter(User.email == user_create.email).first()
     if existing_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Email already registered")
+
     
     # Băm mật khẩu trước khi lưu
     hashed_password = hash_password(user_create.password)
@@ -27,4 +28,5 @@ def create_user(user_create: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
 
-    return {"id": new_user.id, "email": new_user.email}
+    return {"id": new_user.id, "email": new_user.email, "created_at": new_user.created_at}
+

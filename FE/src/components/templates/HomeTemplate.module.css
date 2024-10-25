@@ -1,0 +1,11 @@
+.homeTemplate {
+    display: flex;
+    flex-direction: column; /* Chiều dọc cho các thành phần */
+    min-height: 100vh; /* Chiều cao tối thiểu cho template */
+  }
+  
+  .mainContent {
+    flex: 1; /* Chiếm toàn bộ không gian còn lại */
+    padding: 20px; /* Padding cho nội dung chính */
+  }
+  

@@ -3,9 +3,10 @@ from datetime import datetime, timedelta
 from ..schema import oauth2_token
 from fastapi import Depends, status, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from ...app import conn
+from app import conn 
 from sqlalchemy.orm import Session
-from ...app.models.user import User
+from app.models.user import User
+
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
 
