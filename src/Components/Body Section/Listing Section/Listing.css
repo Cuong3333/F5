@@ -40,15 +40,59 @@
     position: fixed;
     left: 315px;
     /* left: 20px; */
-    top: 100px;
+    top: 110px;
     width: 775px;
     /* width: 450px; */
     height: 560px;
+    transform: scale(0.5);
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
     background: var(--whiteColor);
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
     0 32px 64px -48px rgba(0, 0, 0, 0.5);
+}
+
+.show-chatbot .chatbot{
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.listingSection .chatbot-toggler{
+  position: fixed;
+  right: 430px;
+  bottom: 35px;
+  height: 50px;
+  width: 50px;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  outline: none;
+  cursor: pointer;
+  background: var(--primaryColor);
+  border-radius: 50%;
+}
+
+.listingSection .chatbot-toggler .icon-toggle{
+  position: absolute;
+  font-size: 30px;
+  color: #000;
+}
+
+
+.show-chatbot .chatbot-toggler .iconChatbotToggler-chat,
+.listingSection .chatbot-toggler .iconChatbotToggler-close{
+  opacity: 0;
+}
+
+.show-chatbot .chatbot-toggler .iconChatbotToggler-close{
+  opacity: 1;
 }
 
 .icon{
@@ -64,7 +108,7 @@
 }
 
 .listingSection .chatbot header{
-  background: #724ae8;
+  background: var(--primaryColor);
   padding: 16px 0;
   text-align: center;
 }
@@ -89,7 +133,7 @@
   width: 32px;
   color: #fff;
   align-self: flex-end;
-  background: #724ae8;
+  background: var(--primaryColor);
   text-align: center;
   line-height: 32px;
   border-radius: 4px;
@@ -108,7 +152,7 @@
   font-size: 0.95rem;
   padding: 12px 16px;
   border-radius: 10px 10px 0 10px;
-  background: #724ae8;
+  background: var(--primaryColor);
 }
 
 .listingSection .chatbot .chatbox .incoming p{
@@ -121,7 +165,34 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: #fff;
+  display: flex;
+  gap: 5px;
+  background: var(--whiteColor);
   padding: 5px 20px;
   border-top: 1px solid #ccc;
 }
+
+.listingSection .chatbot .chat-input textarea{
+  height: 55px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  resize: none;
+  padding: 16px 15px 16px 0;
+}
+
+.listingSection .chatbot .chat-input .iconSend{
+  align-self: flex-end;
+  height: 55px;
+  line-height: 55px;
+  color: var(--primaryColor);
+  font-size: 1.35rem;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.listingSection .chatbot .chat-input textarea:valid ~ .iconSend{
+  visibility: visible;
+}
+

@@ -7,13 +7,22 @@ import './Listing.css'
 // import icon
 import { FaRobot } from "react-icons/fa";
 import { GrSend } from "react-icons/gr";
+import { BsRobot } from "react-icons/bs";
+import { RiCloseCircleFill } from "react-icons/ri";
 
 // import { BsArrowRightShort } from "react-icons/bs";
 // import { AiFillHeart } from 'react-icons/ai';
 
 const Listing = () => {
+
   return (
-    <div className="listingSection">
+    <div className="listingSection show-chatbot">
+
+      <button className="chatbot-toggler">
+        <BsRobot className='icon-toggle iconChatbotToggler-chat'/>
+        <RiCloseCircleFill className='icon-toggle iconChatbotToggler-close'/>
+      </button>
+
         <div className="chatbot">
           <header>
             <h2>Chatbot</h2>
@@ -31,8 +40,8 @@ const Listing = () => {
           </ul>
 
           <div className="chat-input">
-            <textarea placeholder='Enter a message...'>chat input</textarea>
-            <GrSend className='icon'/>
+            <textarea placeholder='Enter a message...' required></textarea>
+            <GrSend className='icon iconSend'/>
           </div>
 
       </div>
