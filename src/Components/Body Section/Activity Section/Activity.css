@@ -25,54 +25,111 @@
 
 .activitySection {
   flex-basis: 50%;
+  background: #fff;
+  padding: 5px 15px 25px;
+  border-radius: 10px;
+  height: 350px;
+  
 }
 .activitySection .heading {
   width: 100%;
   justify-content: space-between;
 }
-.activitySection .heading h1 {
-  font-size: var(--h2FontSize);
-  color: var(--blackColor);
-  font-weight: 700;
+
+.activitySection .heading .row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #bdf094;
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-bottom: 25px;
 }
-.activitySection .heading .btn {
+
+.activitySection .heading .row input{
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px;
+  font-weight: 14px;
+}
+
+.activitySection .heading .row .btn{
+  /* border: none;
+  outline: none;
+  padding: 16px 50px;
+  background: #ff5945;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 40px; */
+  padding: 8px 37px;
+  border-radius: 40px;
   border: 1px solid var(--greyText);
 }
-.activitySection .heading .btn:hover {
+
+.activitySection .heading .row .btn:hover{
   border: 1px solid var(--primaryColor);
 }
 .activitySection .secContainer {
-  margin-top: 1rem;
+  margin-top: .1rem;
+  overflow-y: auto;
+  max-height: 250px;
 }
+
 .activitySection .secContainer .singleCustomer {
   align-items: flex-start;
   justify-content: space-between;
 }
-.activitySection .secContainer .singleCustomer img {
+
+.secContainer ul li{
+  list-style: none;
+  font-size: 17px;
+  padding: 12px 8px 12px 50px;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.secContainer ul li::before{
+  content: '';
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  border-radius: 50px;
+  background-image: url(../../../Assets/unchecked.png);
+  background-size: cover;
+  background-position: center;
+  top: 12px;
+  left: 8px;
+}
+
+.secContainer ul li.checked{
+  color: #555;
+  text-decoration: line-through;
+}
+
+.secContainer ul li.checked::before{
+  background-image: url(../../../Assets/checked.png);
+}
+
+.secContainer ul li span{
+  position: absolute;
+  right: 0;
+  top: 5px;
   width: 40px;
   height: 40px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  font-size: 22px;
+  color: #555;
+  line-height: 40px;
+  text-align: center;
   border-radius: 50%;
-  box-shadow: 0 2px 4px var(--itemCardColor);
-  margin-right: 1rem;
+
 }
-.activitySection .secContainer .singleCustomer .customerDetails {
-  flex: 1;
+
+.secContainer ul li span:hover{
+  background: var(--primaryColor);
+  color: #cd2727;
 }
-.activitySection .secContainer .singleCustomer .customerDetails .name {
-  font-size: var(--h3FontSize);
-  font-weight: 600;
-  color: var(--blackColor);
-  display: block;
-}
-.activitySection .secContainer .singleCustomer .customerDetails small {
-  font-weight: 500;
-  color: var(--textColor);
-  font-size: var(--smallFontSize);
-}
-.activitySection .secContainer .singleCustomer .duration {
-  color: var(--textColor);
-  font-weight: 500;
-  font-size: var(--smallestFontSize);
-}/*# sourceMappingURL=Activity.css.map */
+

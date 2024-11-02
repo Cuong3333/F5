@@ -18,10 +18,10 @@ const Listing = () => {
   return (
     <div className="listingSection show-chatbot">
 
-      <button className="chatbot-toggler">
+      {/* <button className="chatbot-toggler">
         <BsRobot className='icon-toggle iconChatbotToggler-chat'/>
         <RiCloseCircleFill className='icon-toggle iconChatbotToggler-close'/>
-      </button>
+      </button> */}
 
         <div className="chatbot">
           <header>
