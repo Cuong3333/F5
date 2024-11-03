@@ -1,5 +1,8 @@
 # Bỏ qua thư mục môi trường ảo .venv
-.env/
+.venv/
 
 # Bỏ qua file .env (lưu trữ các biến môi trường)
 .env
+
+# Bỏ qua thư mục node_modules
+node_modules/
