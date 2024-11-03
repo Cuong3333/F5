@@ -32,3 +32,16 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 2024-11-03 17:29:29,948 - app.router.User.auth - INFO - Login successful for username: user1@example.com
 2024-11-03 17:29:47,131 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
 2024-11-03 17:29:47,485 - app.router.User.auth - INFO - Login successful for username: user1@example.com
+2024-11-03 18:29:17,806 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 18:29:20,676 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 18:29:21,157 - app.router.User.auth - WARNING - Login failed for username: user1@example.com - Incorrect password
+2024-11-03 18:29:30,855 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 18:29:31,178 - app.router.User.auth - WARNING - Login failed for username: user1@example.com - Incorrect password
+2024-11-03 18:29:33,215 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 18:29:33,534 - app.router.User.auth - WARNING - Login failed for username: user1@example.com - Incorrect password
+2024-11-03 18:29:34,062 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 18:29:34,247 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 18:29:34,407 - app.router.User.auth - WARNING - Login failed for username: user1@example.com - Incorrect password
+2024-11-03 18:29:34,722 - app.router.User.auth - WARNING - Login failed for username: user1@example.com - Incorrect password
+2024-11-03 18:29:50,926 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 18:29:51,289 - app.router.User.auth - INFO - Login successful for username: user1@example.com
