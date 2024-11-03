@@ -1,3 +1,5 @@
+# app/schema/oauth2_token.py
+
 from pydantic import BaseModel
 from typing import Optional
 

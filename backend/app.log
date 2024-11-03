@@ -1,0 +1,34 @@
+2024-11-03 17:07:25,946 - app.router.User.register - INFO - Attempting to register user with email: user@example1.com
+2024-11-03 17:07:25,971 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/cuong/Desktop/best_code/F5/backend/env/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2024-11-03 17:07:26,341 - app.router.User.register - INFO - User registered successfully with email: user@example1.com, ID: 1
+2024-11-03 17:07:29,200 - app.router.User.register - INFO - Attempting to register user with email: user@example1.com
+2024-11-03 17:07:29,214 - app.router.User.register - WARNING - Registration failed: Email user@example1.com is already registered.
+2024-11-03 17:08:13,444 - app.router.User.register - INFO - Attempting to register user with email: user1@example.com
+2024-11-03 17:08:13,790 - app.router.User.register - INFO - User registered successfully with email: user1@example.com, ID: 2
+2024-11-03 17:09:10,385 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 17:09:10,749 - app.router.User.auth - INFO - Login successful for username: user1@example.com
+2024-11-03 17:09:12,051 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 17:09:12,391 - app.router.User.auth - INFO - Login successful for username: user1@example.com
+2024-11-03 17:09:14,472 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 17:09:14,787 - app.router.User.auth - INFO - Login successful for username: user1@example.com
+2024-11-03 17:09:17,032 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 17:09:17,346 - app.router.User.auth - INFO - Login successful for username: user1@example.com
+2024-11-03 17:09:27,090 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 17:09:27,410 - app.router.User.auth - INFO - Login successful for username: user1@example.com
+2024-11-03 17:09:32,643 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 17:09:32,961 - app.router.User.auth - INFO - Login successful for username: user1@example.com
+2024-11-03 17:09:34,317 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 17:09:34,635 - app.router.User.auth - INFO - Login successful for username: user1@example.com
+2024-11-03 17:13:29,527 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 17:13:29,910 - app.router.User.auth - INFO - Login successful for username: user1@example.com
+2024-11-03 17:27:56,573 - app.router.User.register - INFO - Attempting to register user with email: cuong@gmail.com
+2024-11-03 17:27:57,051 - app.router.User.register - INFO - User registered successfully with email: cuong@gmail.com, ID: 3
+2024-11-03 17:29:29,562 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 17:29:29,948 - app.router.User.auth - INFO - Login successful for username: user1@example.com
+2024-11-03 17:29:47,131 - app.router.User.auth - INFO - Received login attempt for username: user1@example.com
+2024-11-03 17:29:47,485 - app.router.User.auth - INFO - Login successful for username: user1@example.com
