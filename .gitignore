@@ -4,5 +4,9 @@ backend/env/
 # Bỏ qua file .env (lưu trữ các biến môi trường)
 .env
 
-# Bỏ qua thư mục node_modules trong frontend
+# Bỏ qua thư mục node_modules
 FE/node_modules/
+
+# Bỏ qua các tệp cache của development
+FE/node_modules/.cache/
+
