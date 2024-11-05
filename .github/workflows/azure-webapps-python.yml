@@ -50,7 +50,6 @@ jobs:
       run: |
         source /www/wwwroot/F5/backend/venv/bin/activate
         pip install -r /www/wwwroot/F5/backend/requirements.txt
-    # Uncomment the following steps if frontend dependencies and build are needed
     - name: Reload Service
       run: sudo systemctl daemon-reload
     - name: restart Service
