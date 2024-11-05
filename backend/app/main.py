@@ -27,7 +27,7 @@ app = FastAPI()
 # Thêm middleware CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Bạn có thể thay đổi "*" thành danh sách các miền cụ thể nếu cần
+    allow_origins=["*","https://well-green.btecit.tech", "https://be-well-green.btecit.tech"],  # Bạn có thể thay đổi "*" thành danh sách các miền cụ thể nếu cần
     allow_credentials=True,
     allow_methods=["*"],  # Cho phép tất cả các phương thức
     allow_headers=["*"],  # Cho phép tất cả các headers
