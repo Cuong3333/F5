@@ -1,0 +1,135 @@
+:root {
+  --primaryColor: hsl(94, 59%, 56%);
+  --hoverColor: hsl(93, 75%, 76%);
+  --paleGreen: hsl(96, 75%, 89%);
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(0, 0%, 18%);
+  --greyText: hsl(0, 0%, 75%);
+  --bgColor: hsl(113, 11%, 85%);
+  --inputColor: hsl(330, 12%, 97%);
+  --itemCardColor: hsl(120, 5%, 88%);
+  --itemCardHover: hsl(120, 27%, 87%);
+  /* Font and Typography */
+  --biggestFontSize: 2.5rem;
+  --h1FontSize: 1.5rem;
+  --h2FontSize: 1.25rem;
+  --h3FontSize: 1rem;
+  --normalFontSize: .938rem;
+  --smallFontSize: .813rem;
+  --smallestFontSize: .75rem;
+  --hoverColor: #bdf094;
+  --textColor: hsl(240, 1%, 48%);
+  --bgColor: hsl(220, 10%, 94%);
+  --greyText: rgb(190, 190, 190);
+}
+
+.activitySection {
+  flex-basis: 50%;
+  background: #fff;
+  padding: 5px 15px 25px;
+  border-radius: 10px;
+  height: 350px;
+  
+}
+.activitySection .heading {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.activitySection .heading .row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #bdf094;
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
+
+.activitySection .heading .row input{
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px;
+  font-weight: 14px;
+}
+
+.activitySection .heading .row .btn{
+  /* border: none;
+  outline: none;
+  padding: 16px 50px;
+  background: #ff5945;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 40px; */
+  padding: 8px 37px;
+  border-radius: 40px;
+  border: 1px solid var(--greyText);
+}
+
+.activitySection .heading .row .btn:hover{
+  border: 1px solid var(--primaryColor);
+}
+.activitySection .secContainer {
+  margin-top: .1rem;
+  overflow-y: auto;
+  max-height: 250px;
+}
+
+.activitySection .secContainer .singleCustomer {
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.secContainer ul li{
+  list-style: none;
+  font-size: 17px;
+  padding: 12px 8px 12px 50px;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.secContainer ul li::before{
+  content: '';
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  border-radius: 50px;
+  background-image: url(../../../Assets/unchecked.png);
+  background-size: cover;
+  background-position: center;
+  top: 12px;
+  left: 8px;
+}
+
+.secContainer ul li.checked{
+  color: #555;
+  text-decoration: line-through;
+}
+
+.secContainer ul li.checked::before{
+  background-image: url(../../../Assets/checked.png);
+}
+
+.secContainer ul li span{
+  position: absolute;
+  right: 0;
+  top: 5px;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  color: #555;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+
+}
+
+.secContainer ul li span:hover{
+  background: var(--primaryColor);
+  color: #cd2727;
+}
+
