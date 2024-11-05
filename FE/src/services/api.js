@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000'; // URL của backend
+const API_URL = 'https://be-well-green.btecit.tech'; // URL của backend
 
 // Hàm đăng nhập
 export const login = async (username, password) => {
