@@ -1,4 +1,4 @@
 backend/.env
 backend/venv/
 backend/app/.env
-FE/node_modules
+FE/node_modules/
