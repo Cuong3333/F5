@@ -1,0 +1,49 @@
+.historySection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .fileList {
+    margin-bottom: 20px;
+  }
+  
+  .fileList ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .fileList li {
+    margin: 5px 0;
+  }
+  
+  .fileList button {
+    background-color: #0084ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .fileList button:hover {
+    background-color: #005bb5;
+  }
+  
+  .fileContent {
+    width: 100%;
+    max-width: 600px;
+    background: #f7f7f7;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fileContent pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    line-height: 1.5;
+  }
+  

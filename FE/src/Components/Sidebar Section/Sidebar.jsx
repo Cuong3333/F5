@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'; // Import Link
 import "./Sidebar.css";
 import logo from '../../Assets/logo.png'
 
@@ -16,90 +17,79 @@ import { BsCreditCard2Front } from "react-icons/bs";
 
 // icon question sidebar
 import { BsQuestionOctagon } from "react-icons/bs";
-
+import { AiOutlineHistory } from "react-icons/ai"; // Icon cho mục History
 
 const Sidebar = () => {
   return (
     <div className="sideBar grid">
-
       <div className="logoDiv flex">
         <img src={logo} alt="" />
         <h2>Planti.</h2>
       </div>
 
-      {/* menudiv1 */}
+      {/* MenuDiv1 */}
       <div className="menuDiv">
-        <h3 className="divTitle">
-          QUICK MENU
-        </h3>
+        <h3 className="divTitle">QUICK MENU</h3>
         <ul className="menuLists grid">
           <li className="listItem">
-            <a href="#" className="menuLink flex">
+            <Link to="/main" className="menuLink flex">
               <IoMdSpeedometer className="icon"/>
-              <span className="smallText">Dash board</span>
-            </a>
+              <span className="smallText">Dashboard</span>
+            </Link>
           </li>
 
           <li className="listItem">
-            <a href="#" className="menuLink flex">
+            <Link to="/orders" className="menuLink flex">
               <MdDeliveryDining className="icon"/>
               <span className="smallText">My Order</span>
-            </a>
+            </Link>
           </li>
 
           <li className="listItem">
-            <a href="#" className="menuLink flex">
+            <Link to="/explore" className="menuLink flex">
               <MdOutlineExplore className="icon"/>
               <span className="smallText">Explore</span>
-            </a>
+            </Link>
           </li>
 
           <li className="listItem">
-            <a href="#" className="menuLink flex">
+            <Link to="/products" className="menuLink flex">
               <BsTrophy className="icon"/>
               <span className="smallText">Products</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
 
       {/* Setting div2 */}
       <div className="settingsDiv">
-        <h3 className="divTitle">
-          SETTING
-        </h3>
+        <h3 className="divTitle">SETTING</h3>
         <ul className="menuLists grid">
           <li className="listItem">
-            <a href="#" className="menuLink flex">
+            <Link to="/charts" className="menuLink flex">
               <AiOutlinePieChart className="icon"/>
               <span className="smallText">Charts</span>
-            </a>
-          </li>
-
-          {/* <li className="listItem">
-            <a href="#" className="menuLink flex">
-              <BiTrendingUp className="icon"/>
-              <span className="smallText">Trends</span>
-            </a>
+            </Link>
           </li>
 
           <li className="listItem">
-            <a href="#" className="menuLink flex">
-              <MdOutlinePermContactCalendar className="icon"/>
-              <span className="smallText">Contact</span>
-            </a>
-          </li> */}
-
-          <li className="listItem">
-            <a href="#" className="menuLink flex">
+            <Link to="/billing" className="menuLink flex">
               <BsCreditCard2Front className="icon"/>
               <span className="smallText">Billing</span>
-            </a>
+            </Link>
+          </li>
+
+          {/* New History Section */}
+          <li className="listItem">
+            <Link to="/history" className="menuLink flex">
+              <AiOutlineHistory className="icon"/> {/* Icon for history */}
+              <span className="smallText">History</span>
+            </Link>
           </li>
         </ul>
       </div>
 
-        {/* Sidebar Card */}
+      {/* Sidebar Card */}
       <div className="sideBarCard">
         <BsQuestionOctagon className="icon"/>
         <div className="cardContent">

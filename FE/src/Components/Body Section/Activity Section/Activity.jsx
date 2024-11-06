@@ -1,36 +1,31 @@
-import React from 'react'
-import './Activity.css'
-import { useTodo } from '../../../hooks/useTodo';  // Import custom hook
-
-//import img
-import img from '../../../Assets/iconTodolist.jpg'
-
-// icon react
-import { BsArrowRightShort } from 'react-icons/bs'
+// Activity.jsx
+import React from 'react';
+import { useTodoContext } from '../../../hooks/TodoContext'; // Import TodoContext
+import './Activity.css';
+import { BsArrowRightShort } from 'react-icons/bs';
 
 const Activity = () => {
-
-  const { input, setInput, tasks, addTask, toggleTask, removeTask } = useTodo();
+  const { tasks, addTask, toggleTask, removeTask } = useTodoContext();
 
   return (
     <div className="activitySection">
       <div className="heading flex">
-        
-
         <div className="row">
           <input
             type="text"
             placeholder="Add your task..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && e.target.value.trim()) {
+                addTask(e.target.value.trim());
+                e.target.value = '';
+              }
+            }}
           />
-          <button className='btn flex' onClick={addTask}>Add<BsArrowRightShort className='icon'/></button>
+          <button className='btn flex' onClick={() => addTask("New Task")}>Add<BsArrowRightShort className='icon'/></button>
         </div>
-
       </div>
 
       <div className="secContainer grid">
-        
         <ul>
           {tasks.map((task, index) => (
             <li
@@ -50,95 +45,9 @@ const Activity = () => {
             </li>
           ))}
         </ul>
-
-        {/* <div className="todo-app">
-        <h2>
-          To-Do List <img src={img} alt="icon" />
-        </h2>
-        <div className="row">
-          <input
-            type="text"
-            placeholder="Add your text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button onClick={addTask}>Add</button>
-        </div>
-
-        <ul>
-          {tasks.map((task, index) => (
-            <li
-              key={index}
-              className={task.completed ? 'checked' : ''}
-              onClick={() => toggleTask(index)}
-            >
-              {task.text}
-              <span
-                onClick={(e) => {
-                  e.stopPropagation();
-                  removeTask(index);
-                }}
-              >
-                &times;
-              </span>
-            </li>
-          ))}
-        </ul>
-        </div> */}
-
-        {/* Mẫu =====================*/}
-
-        {/* <div className="singleCustomer flex">
-          <img src={img} alt="Customer" />
-          <div className="customerDetails">
-            <span className="name">Ola Martha</span>
-            <small>Orderd a new plant</small>
-          </div>
-
-          <div className="duration">
-            2 min ago
-          </div>
-        </div>
-
-        <div className="singleCustomer flex">
-          <img src={img} alt="Customer" />
-          <div className="customerDetails">
-            <span className="name">Ola Martha</span>
-            <small>Orderd a new plant</small>
-          </div>
-
-          <div className="duration">
-            2 min ago
-          </div>
-        </div>
-
-        <div className="singleCustomer flex">
-          <img src={img} alt="Customer" />
-          <div className="customerDetails">
-            <span className="name">Ola Martha</span>
-            <small>Orderd a new plant</small>
-          </div>
-
-          <div className="duration">
-            2 min ago
-          </div>
-        </div>
-
-        <div className="singleCustomer flex">
-          <img src={img} alt="Customer" />
-          <div className="customerDetails">
-            <span className="name">Ola Martha</span>
-            <small>Orderd a new plant</small>
-          </div>
-
-          <div className="duration">
-            2 min ago
-          </div>
-        </div> */}
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Activity
+export default Activity;

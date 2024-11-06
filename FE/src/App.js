@@ -5,11 +5,10 @@ import Sidebar from './Components/Sidebar Section/Sidebar';
 import Body from './Components/Body Section/Body';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
+import History from './Components/History Section/History';
+import { TodoProvider } from './hooks/TodoContext';
 
-import {
-  createBrowserRouter,
-  RouterProvider
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
@@ -22,18 +21,29 @@ const router = createBrowserRouter([
   },
   {
     path: '/main',
-    element: <div className='container'>
-      <Sidebar/>
-      <Body/>
-    </div>
+    element: (
+      <div className='container'>
+        <Sidebar/>
+        <Body/>
+      </div>
+    )
+  },
+  {
+    path: '/history',
+    element: (
+      <div className='container'>
+        <Sidebar/>
+        <History/>
+      </div>
+    )
   }
 ]);
 
 const App = () => {
   return (
-    <div>
-      <RouterProvider router={router}/>
-    </div>
+    <TodoProvider> {/* Bao bọc toàn bộ ứng dụng bằng TodoProvider */}
+      <RouterProvider router={router} />
+    </TodoProvider>
   );
 };
 
