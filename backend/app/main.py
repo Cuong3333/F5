@@ -8,6 +8,8 @@ from .conn import Base, engine
 from .models import posts, user
 from .router.User import router as user_router
 from .router.Posts import router as posts_router
+import requests
+from bs4 import BeautifulSoup
 import logging
 import os
 from datetime import datetime
@@ -21,6 +23,7 @@ Name = ' bien '
 Age = 20
 can = '56 kg'
 cao = '1m7'
+benh = 'có tiền sử bệnh tăng huyết áp'
 # Load environment variables
 load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
@@ -32,7 +35,7 @@ os.makedirs(HISTORY_FOLDER, exist_ok=True)
 # Set up FastAPI and templates
 app = FastAPI()
 templates = Jinja2Templates(directory="FE/src")
-app.mount("/static", StaticFiles(directory="FE/src/static"), name="static")
+# app.mount("/static", StaticFiles(directory="FE/src/static"), name="static")
 app.mount("/history", StaticFiles(directory="history"), name="history")
 
 # Configure logging
@@ -69,42 +72,65 @@ def get_today_folder():
     os.makedirs(today_folder, exist_ok=True)
     return today_folder
 
+def get_web_content(url):
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            paragraphs = soup.find_all('p')
+            text_content = "\n".join([para.get_text() for para in paragraphs])
+            return text_content
+        else:
+            return None
+    except Exception as e:
+        print(f"Lỗi khi lấy dữ liệu từ {url}: {e}")
+        return None
+
+
+def store_web_contents():
+    urls = [
+        "https://www.vinmec.com/vie/bai-viet/nao-la-mot-che-do-dinh-duong-lanh-manh-vi",
+        "https://medlatec.vn/tin-tuc/thuc-don-an-uong-khoa-hoc-de-giam-can-hieu-qua-an-toan-s195-n22536",
+        "https://sieutinh.com/tinh-luong-calo-can-thiet-trong-ngay"
+
+    ]
+    web_contents = {url: get_web_content(url) for url in urls}
+    return web_contents
 # Function to generate chat response and save as audio
-def generate_response(user_input):
+def generate_response(user_input, web_contents):
+    combined_content = "\n\n".join([f"Nội dung từ {url}:\n{content}" for url, content in web_contents.items() if content])
+    prompt = f"Dưới đây là các nội dung tham khảo từ các trang web:\n{combined_content}\n\nCâu hỏi của người dùng: {user_input}"
     completion = openai.ChatCompletion.create(
         model="gpt-4o",
         messages=[
             {"role": "system", "content": (
                 "Bạn là một trợ lý sức khỏe của tôi. Trả lời ngắn gọn, rõ ràng và không dùng ký tự ** để nhấn mạnh bất kỳ thông tin nào."
                 "Trả lời dạng danh sách mỗi mục xuống dòng và tránh lặp lại ký hiệu đặc biệt như dấu * hoặc ** trong toàn bộ câu trả lời. "
-                f"Tôi là {Name}, tôi {Age} tuổi, chiều cao của tôi là {cao}, và cân nặng của tôi là {can}."
-
-                
+                f"Tôi là {Name}, tôi {Age} tuổi, chiều cao của tôi là {cao}, và cân nặng của tôi là {can}. {benh}"
+                "nếu người dùng hỏi về hoạt động hay nhiệm vụ thì bạn đưa ra các lời khuyên hoạt động thể dục thể thao phù hợp với tôi "
             )},
-            {"role": "user", "content": user_input}
-        ],
-        # temperature=0.5,  # Adjust this as necessary (lower for more concise responses)
-        # max_tokens=500  # Limit tokens for more concise replies
+            {"role": "user", "content": prompt}
+        ]
     )
-    response_text = completion.choices[0].message['content']
     
-    # Create today's folder
+    # Format response to ensure line breaks after each period and dash
+    response_text = completion.choices[0].message['content']
+    formatted_response = response_text.replace(". ", ".\n").replace("- ", "\n- ")
+
+    # Continue with audio conversion as before
     today_folder = get_today_folder()
     audio_filename_mp3 = f"response_audio_{datetime.now().strftime('%Y%m%d%H%M%S')}.mp3"
     audio_filepath_mp3 = os.path.join(today_folder, audio_filename_mp3)
     
-    # Save as .mp3
-    tts = gTTS(response_text, lang='vi')
+    tts = gTTS(formatted_response, lang='vi')
     tts.save(audio_filepath_mp3)
     
-    # Convert .mp3 to .wav
     audio_filename_wav = f"response_audio_{datetime.now().strftime('%Y%m%d%H%M%S')}.wav"
     audio_filepath_wav = os.path.join(today_folder, audio_filename_wav)
     sound = AudioSegment.from_mp3(audio_filepath_mp3)
     sound.export(audio_filepath_wav, format="wav")
 
-    return response_text, audio_filepath_wav
-
+    return formatted_response, audio_filepath_wav
 
 import subprocess
 # Function to convert audio to wav format
@@ -129,7 +155,16 @@ def convert_audio_to_wav(input_file_path: str, output_file_path: str):
 # Endpoint for text chat
 @app.post("/chat", response_class=JSONResponse)
 async def chat(user_input: str = Form(...)):
-    response_text, audio_filepath = generate_response(user_input)
+    # Fetch web contents
+    web_contents = store_web_contents()  # Use the function to get the web contents
+    
+    # Check if web_contents is valid
+    if not web_contents:
+        return JSONResponse({"error": "Failed to fetch web contents."}, status_code=500)
+    
+    # Pass both user_input and web_contents to generate_response
+    response_text, audio_filepath = generate_response(user_input, web_contents)
+    
     return {
         "response": response_text,
         "audio_url": f"http://localhost:8000/{audio_filepath}"  
