@@ -1,147 +1,154 @@
-import React from 'react'
-import './Listing.css'
-
-// import img
-// import img1 from '../../../Assets/img4.png'
-
-// import icon
-import { FaRobot } from "react-icons/fa";
+import React, { useState, useEffect } from 'react';
 import { GrSend } from "react-icons/gr";
-import { BsRobot } from "react-icons/bs";
-import { RiCloseCircleFill } from "react-icons/ri";
-
-// import { BsArrowRightShort } from "react-icons/bs";
-// import { AiFillHeart } from 'react-icons/ai';
+import { FaMicrophone } from "react-icons/fa";
+import './Listing.css';
 
 const Listing = () => {
+  const [isRecording, setIsRecording] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [mediaRecorder, setMediaRecorder] = useState(null);
+  const [audioChunks, setAudioChunks] = useState([]);
+  const [transcript, setTranscript] = useState(""); // Văn bản nhận dạng từ giọng nói
+
+    // Hàm cập nhật transcript khi người dùng gõ vào textarea
+  const handleInputChange = (event) => {
+    setTranscript(event.target.value);
+  };
+  // Hàm để bắt đầu hoặc dừng ghi âm và nhận diện giọng nói
+  const toggleRecording = () => {
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  };
+
+  const startRecording = () => {
+    // Bắt đầu ghi âm với Web Speech API
+    if ('webkitSpeechRecognition' in window) {
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = "vi-VN"; // Ngôn ngữ Tiếng Việt
+
+      recognition.onstart = () => {
+        setIsRecording(true);
+      };
+
+      recognition.onresult = (event) => {
+        const speechToText = event.results[0][0].transcript;
+        setTranscript(speechToText); // Cập nhật văn bản vào transcript
+        document.getElementById("user_input").value = speechToText; // Hiển thị trong textarea
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error", event);
+        setIsRecording(false);
+      };
+
+      recognition.onend = () => {
+        setIsRecording(false);
+      };
+
+      recognition.start();
+    } else {
+      console.warn("Web Speech API is not supported by this browser.");
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder) {
+      mediaRecorder.stop();
+      setIsRecording(false);
+    }
+  };
+
+  // Hàm gửi tin nhắn văn bản
+  const sendMessage = async () => {
+    const messageInput = document.getElementById("user_input").value;
+
+    if (messageInput.trim() !== "") {
+      // Hiển thị tin nhắn của người dùng
+      setMessages([...messages, { sender: "user", text: messageInput }]);
+
+      try {
+        // Gửi yêu cầu tới backend để nhận phản hồi
+        const response = await fetch("http://localhost:8000/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ user_input: messageInput })
+        });
+
+        const data = await response.json();
+
+        // Hiển thị phản hồi từ chatbot
+        if (data.response) {
+          setMessages(prevMessages => [
+            ...prevMessages,
+            { sender: "bot", text: data.response }
+          ]);
+        }
+
+        // Phát âm thanh nếu có
+        if (data.audio_url) {
+          const audio = new Audio(data.audio_url);
+          audio.play().catch(error => console.error("Error playing audio:", error));
+          
+          // Hiển thị trình phát âm thanh trong giao diện
+          const audioElement = (
+            <audio controls src={data.audio_url} style={{ marginTop: '10px' }}>
+              Your browser does not support the audio element.
+            </audio>
+          );
+          setMessages(prevMessages => [
+            ...prevMessages,
+            { sender: "bot", text: "Bot sent an audio response:", audio: audioElement }
+          ]);
+        }
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
+
+      // Xóa nội dung ô nhập sau khi gửi
+      document.getElementById("user_input").value = "";
+      setTranscript("");
+    }
+  };
 
   return (
     <div className="listingSection show-chatbot">
-
-      {/* <button className="chatbot-toggler">
-        <BsRobot className='icon-toggle iconChatbotToggler-chat'/>
-        <RiCloseCircleFill className='icon-toggle iconChatbotToggler-close'/>
-      </button> */}
-
-        <div className="chatbot">
-          <header>
-            <h2>Chatbot</h2>
-          </header>
-
-          <ul className="chatbox">
-            <li className="chat incoming">
-              <FaRobot className='icon'/>
-              <p>Hi there <br/> How can I help you today?</p>
-            </li>
-
-            <li className="chat outgoing">
-              <p>i am is sang</p>
-            </li>
-          </ul>
-
-          <div className="chat-input">
-            <textarea placeholder='Enter a message...' required></textarea>
-            <GrSend className='icon iconSend'/>
-          </div>
-
+      <div className="chatbot">
+        <header>
+          <h2>Chatbot</h2>
+        </header>
+        
+        <div className="chat-box" id="chat-box">
+          {messages.map((msg, idx) => (
+            <div key={idx} className={`chat-message ${msg.sender}`}>
+              {msg.text}
+              {msg.audio && msg.audio}  {/* Hiển thị phần tử audio nếu có */}
+            </div>
+          ))}
+        </div>
+        
+        <div className="chat-input">
+          <textarea
+            id="user_input"
+            placeholder="Enter a message..."
+            required
+            value={transcript}
+            onChange={handleInputChange} // Cho phép người dùng nhập liệu
+          ></textarea>
+          <button onClick={toggleRecording} className="voice-button">
+            {isRecording ? '🔴 Recording...' : <FaMicrophone size={20} />}
+          </button>
+          <button onClick={sendMessage}>
+            <GrSend className="icon iconSend" />
+          </button>
+        </div>
       </div>
-
-      {/* <div className="heading flex">
-        <h1>My Listing</h1>
-        <button className='btn flex'>
-          See All
-          <BsArrowRightShort className='icon'/>
-        </button>
-      </div> */}
-
-        {/* item.. */}
-      {/* <div className="secContainer flex">
-        <div className="singleItem">
-          <AiFillHeart className='icon'/>
-          <img src={img1} alt="img" />
-          <h3>sang</h3>
-        </div>
-
-        <div className="singleItem">
-          <AiFillHeart className='icon'/>
-          <img src={img1} alt="img" />
-          <h3>sang</h3>
-        </div>
-
-        <div className="singleItem">
-          <AiFillHeart className='icon'/>
-          <img src={img1} alt="img" />
-          <h3>sang</h3>
-        </div>
-
-        <div className="singleItem">
-          <AiFillHeart className='icon'/>
-          <img src={img1} alt="img" />
-          <h3>sang</h3>
-        </div>
-      </div> */}
-
-      {/* Top sellll */}
-      {/* <div className="sellers flex">
-        <div className="topSellers">
-          <div className="heading flex">
-            <h3>Top Sellers</h3>
-            <button className='btn flex'>
-              See All
-              <BsArrowRightShort className='icon'/>
-            </button>
-          </div>
-
-          <div className="card flex">
-            <div className="users">
-              <img src={img1} alt="User" />
-              <img src={img1} alt="User" />
-              <img src={img1} alt="User" />
-              <img src={img1} alt="User" />
-            </div>
-
-            <div className="cardText">
-              <span>
-                14.555 Plant sold <br/>
-                <small>
-                  21 Sellers <span className="date">7 days</span>
-                </small>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="featuredSellers">
-          <div className="heading flex">
-            <h3>featured Sellers</h3>
-            <button className='btn flex'>
-              See All
-              <BsArrowRightShort className='icon'/>
-            </button>
-          </div>
-
-          <div className="card flex">
-            <div className="users">
-              <img src={img1} alt="User" />
-              <img src={img1} alt="User" />
-              <img src={img1} alt="User" />
-              <img src={img1} alt="User" />
-            </div>
-
-            <div className="cardText">
-              <span>
-                28,555 Plant sold <br/>
-                <small>
-                  26 Sellers <span className="date">31 days</span>
-                </small>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div> */}
-      
     </div>
-  )
-}
+  );
+};
 
-export default Listing
+export default Listing;

@@ -60,6 +60,18 @@
   opacity: 1;
   pointer-events: auto;
 }
+.voice-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.voice-button img, .voice-button svg {
+  width: 24px;
+  height: 24px;
+}
 
 .listingSection .chatbot-toggler{
   position: fixed;

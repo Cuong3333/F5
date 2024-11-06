@@ -55,3 +55,53 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 2024-11-04 12:58:05,567 - app.router.User.register - INFO - User registered successfully with email: admin@example.com, ID: 4
 2024-11-04 12:58:56,906 - app.router.User.auth - INFO - Received login attempt for username: admin@example.com
 2024-11-04 12:58:57,276 - app.router.User.auth - INFO - Login successful for username: admin@example.com
+2024-11-04 15:28:55,284 - app.router.User.auth - INFO - Received login attempt for username: admin@example.com
+2024-11-04 15:28:55,524 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/biennguyen0304/btecthi/bteccoder/F5/backend/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2024-11-04 15:28:55,750 - app.router.User.auth - INFO - Login successful for username: admin@example.com
+2024-11-04 23:21:19,995 - app.router.User.auth - INFO - Received login attempt for username: admin@example.com
+2024-11-04 23:21:20,028 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/biennguyen0304/btecthi/bteccoder/F5/backend/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2024-11-04 23:21:20,448 - app.router.User.auth - INFO - Login successful for username: admin@example.com
+2024-11-05 13:01:26,614 - app.router.User.auth - INFO - Received login attempt for username: admin@example.com
+2024-11-05 13:01:26,683 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/biennguyen0304/btecthi/bteccoder/F5/backend/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2024-11-05 13:01:26,916 - app.router.User.auth - INFO - Login successful for username: admin@example.com
+2024-11-05 21:39:34,643 - app.router.User.auth - INFO - Received login attempt for username: admin@example.com
+2024-11-05 21:39:34,660 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/biennguyen0304/btecthi/bteccoder/F5/backend/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2024-11-05 21:39:35,123 - app.router.User.auth - INFO - Login successful for username: admin@example.com
+2024-11-06 09:55:02,855 - app.router.User.auth - INFO - Received login attempt for username: admin@example
+2024-11-06 09:55:02,932 - app.router.User.auth - WARNING - Login failed for username: admin@example - User not found
+2024-11-06 09:55:09,956 - app.router.User.auth - INFO - Received login attempt for username: admin@example.com
+2024-11-06 09:55:10,513 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/biennguyen0304/btecthi/bteccoder/F5/backend/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2024-11-06 09:55:10,740 - app.router.User.auth - INFO - Login successful for username: admin@example.com
+2024-11-06 14:49:39,264 - app.router.User.auth - INFO - Received login attempt for username: admin@example.com
+2024-11-06 14:49:39,324 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/biennguyen0304/btecthi/bteccoder/F5/backend/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2024-11-06 14:49:39,793 - app.router.User.auth - INFO - Login successful for username: admin@example.com
