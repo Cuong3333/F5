@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import ConfettiButton from '../components/buttonClick/ButtonClickSnow';
 
+// https://www.kirilv.com/canvas-confetti/
 const ChatBot = () => {
   return (
-    <div>ChatBot</div>
-  )
+    <div>
+      <ConfettiButton />
+    </div>
+  );
 }
 
-export default ChatBot
+export default ChatBot;

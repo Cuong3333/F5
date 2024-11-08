@@ -9,7 +9,7 @@ import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import Tasks from './pages/Task';
 import Trash from './pages/Trash';
-// import TaskDetails from "./pages/TaskDetails";
+import TaskDetails from "./pages/TaskDetails";
 import Users from "./pages/Users";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
@@ -130,6 +130,7 @@ function App() {
           <Route path='/trashed' element={<Trash />} />
           <Route path='/trashed' element={<Trash />} />
           <Route path='/chatbot' element={<ChatBot />} />
+          <Route path='/task/:id' element={<TaskDetails />} />
         </Route>
 
         <Route path='/log-in' element={<Login />} />

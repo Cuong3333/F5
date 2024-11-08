@@ -10,7 +10,7 @@ import Tabs from "../components/Tabs";
 import TaskTitle from "../components/TaskTitle";
 import BoardView from "../components/BoardView";
 import Table from "../components/task/Table";
-// import AddTask from "../components/task/AddTask";
+import AddTask from "../components/task/AddTask";
 // icon
 import { IoMdAdd } from "react-icons/io";
 import { FaList } from "react-icons/fa";
@@ -105,7 +105,8 @@ const Tasks = () => {
 
       </Tabs>
 
-      {/* <AddTask open={open} setOpen={setOpen} /> */}
+      {/* componet sử dụng để xử lý nut thêm task trong task  */}
+      <AddTask open={open} setOpen={setOpen} />
     </div>
   );
 };

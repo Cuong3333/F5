@@ -593,7 +593,7 @@ export const chartData = [
   },
 ];
 
-// sử dụng cho page tasks
+// sử dụng cho page t
 export const tasks = [
   {
     _id: "65c5f12ab5204a81bde866a9",
@@ -645,7 +645,11 @@ export const tasks = [
     date: "2024-02-09T00:00:00.000Z",
     priority: "medium",
     stage: "in progress",
-    assets: [],
+    assets: [
+      "https://firebasestorage.googleapis.com/v0/b/taskmanager-557d7.appspot.com/o/1707410130023hand-holding-writing-checklist-application-form-document-clipboard-white-background-3d-illustration.jpg?alt=media&token=08de4848-517f-48ca-a9b4-624744d5ddb0",
+      "https://firebasestorage.googleapis.com/v0/b/taskmanager-557d7.appspot.com/o/1707412301523image_processing20220706-26930-ktfgon.png?alt=media&token=6cd185c1-9fc3-4f52-bb0b-0d4a29e65b85",
+      "https://firebasestorage.googleapis.com/v0/b/taskmanager-557d7.appspot.com/o/1707412306237image_processing20220706-11953-1f826f4.png?alt=media&token=7270475f-a994-41fd-8ae6-62e00f72b0b3",
+    ],
     team: [
       {
         _id: "65c317360fd860f958baa08e",
@@ -666,7 +670,7 @@ export const tasks = [
         type: "started",
         activity: "Project started",
         date: "2024-02-09T09:16:56.623Z",
-        by: "65c202d4aa62f32ffd1303cc",
+        by: {_id: "65c202d4aa62f32ffd1303cc", name: "Codewave"},
         _id: "65c5f18bb5204a81bde866d1",
       },
       {
@@ -678,6 +682,20 @@ export const tasks = [
       },
       {
         type: "bug",
+        activity: "bug found",
+        date: "2024-02-09T09:16:56.623Z",
+        by: "65c202d4aa62f32ffd1303cc",
+        _id: "65c5f1abb5204a81bde866eb",
+      },
+      {
+        type: "started",
+        activity: "bug found",
+        date: "2024-02-09T09:16:56.623Z",
+        by: "65c202d4aa62f32ffd1303cc",
+        _id: "65c5f1abb5204a81bde866eb",
+      },
+      {
+        type: "todo",
         activity: "bug found",
         date: "2024-02-09T09:16:56.623Z",
         by: "65c202d4aa62f32ffd1303cc",

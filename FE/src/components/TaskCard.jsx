@@ -6,8 +6,8 @@ import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../utils";
 // compoment cha
 import UserInfo from "./UserInfo";
 // component trong task
-// import TaskDialog from "./task/TaskDialog";
-// import AddSubTask from "./task/AddSubTask";
+import TaskDialog from "./task/TaskDialog";
+import AddSubTask from "./task/AddSubTask";
 
 // icon
 import { BiMessageAltDetail } from "react-icons/bi";
@@ -48,7 +48,7 @@ const TaskCard = ({ task }) => {
           </div>
           
           {/* thông tin người dung sem có phải là admin không phải thì sử dụng TaskDialog */}
-          {/* {user?.isAdmin && <TaskDialog task={task} />} */}
+          {user?.isAdmin && <TaskDialog task={task} />}
           
         </div>
 
@@ -151,7 +151,7 @@ const TaskCard = ({ task }) => {
         </div>
       </div>
 
-      {/* <AddSubTask open={open} setOpen={setOpen} id={task._id} /> */}
+      <AddSubTask open={open} setOpen={setOpen} id={task._id} />
     </>
   );
 };

@@ -1,18 +1,6 @@
 import clsx from "clsx";
-import moment from "moment"; // ngày giờ
+import moment from "moment";
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-// thông báo hiển thị thông tin như thành công, thất bại, hoặc cảnh báo
-import { toast } from "sonner";
-// api fake
-import { tasks } from "../assets/data";
-// tiện ích fuc
-import { PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
-// components
-import Loading from "../components/Loader";
-import Tabs from "../components/Tabs";
-import Button from "../components/Button";
-// icon
 import { FaBug, FaTasks, FaThumbsUp, FaUser } from "react-icons/fa";
 import { GrInProgress } from "react-icons/gr";
 import {
@@ -24,6 +12,13 @@ import {
   MdTaskAlt,
 } from "react-icons/md";
 import { RxActivityLog } from "react-icons/rx";
+import { useParams } from "react-router-dom";
+import { toast } from "sonner";
+import { tasks } from "../assets/data";
+import Tabs from "../components/Tabs";
+import { PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
+import Loading from "../components/Loader";
+import Button from "../components/Button";
 
 const assets = [
   "https://images.pexels.com/photos/2418664/pexels-photo-2418664.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -92,11 +87,11 @@ const act_types = [
 ];
 
 const TaskDetails = () => {
-  // URL chứa các tham số động như /user/:id, có thể sử dụng useParams để lấy giá trị của id.
+
   const { id } = useParams();
 
   const [selected, setSelected] = useState(0);
-  const task = tasks[3]; // fuc task thì api fake
+  const task = tasks[1];
 
   return (
     <div className='w-full flex flex-col gap-3 mb-4 overflow-y-hidden'>
@@ -112,13 +107,11 @@ const TaskDetails = () => {
                   <div
                     className={clsx(
                       "flex gap-1 items-center text-base font-semibold px-3 py-1 rounded-full",
-                      PRIOTITYSTYELS[task?.priority], // fuc util màu theo mức độ ưu tiên
-                      bgColor[task?.priority] // màu theo mức độ ưu tiên - obj
+                      PRIOTITYSTYELS[task?.priority],
+                      bgColor[task?.priority]
                     )}
                   >
-                    {/* icon động dự trên mức độ ưu tiên */}
                     <span className='text-lg'>{ICONS[task?.priority]}</span>
-                    {/* tên mức đội ưu tiên viêt hoa */}
                     <span className='uppercase'>{task?.priority} Priority</span>
                   </div>
 
@@ -126,24 +119,20 @@ const TaskDetails = () => {
                     <div
                       className={clsx(
                         "w-4 h-4 rounded-full",
-                        // class động dựa trên loại nhiệm vụ 
                         TASK_TYPE[task.stage]
                       )}
                     />
-                    {/* title loại nhiệm vụ */}
                     <span className='text-black uppercase'>{task?.stage}</span>
                   </div>
                 </div>
 
                 <p className='text-gray-500'>
-                  {/* ngyaf tạo  */}
                   Created At: {new Date(task?.date).toDateString()}
                 </p>
 
                 <div className='flex items-center gap-8 p-4 border-y border-gray-200'>
                   <div className='space-x-2'>
                     <span className='font-semibold'>Assets :</span>
-                    {/* số tài nguyên hình ảnh  */}
                     <span>{task?.assets?.length}</span>
                   </div>
 
@@ -151,7 +140,6 @@ const TaskDetails = () => {
 
                   <div className='space-x-2'>
                     <span className='font-semibold'>Sub-Task :</span>
-                    {/* bao nhiêu nhiệm vụ phụ  */}
                     <span>{task?.subTasks?.length}</span>
                   </div>
                 </div>
@@ -160,8 +148,6 @@ const TaskDetails = () => {
                   <p className='text-gray-600 font-semibold test-sm'>
                     TASK TEAM
                   </p>
-
-                  {/* duyệt có bao nhiêu người trong team  */}
                   <div className='space-y-3'>
                     {task?.team?.map((m, index) => (
                       <div
@@ -174,15 +160,12 @@ const TaskDetails = () => {
                           }
                         >
                           <span className='text-center'>
-                            {/* lấy tên viết tắt team  */}
                             {getInitials(m?.name)}
                           </span>
                         </div>
 
                         <div>
-                          {/* tên thành viên  */}
                           <p className='text-lg font-semibold'>{m?.name}</p>
-                          {/* vai trò  */}
                           <span className='text-gray-500'>{m?.title}</span>
                         </div>
                       </div>
@@ -195,7 +178,6 @@ const TaskDetails = () => {
                     SUB-TASKS
                   </p>
                   <div className='space-y-8'>
-                    {/* duyệt lấy nhiệm vụ phụ trong nhiệm vụ  */}
                     {task?.subTasks?.map((el, index) => (
                       <div key={index} className='flex gap-3'>
                         <div className='w-10 h-10 flex items-center justify-center rounded-full bg-violet-50-200'>
@@ -205,16 +187,14 @@ const TaskDetails = () => {
                         <div className='space-y-1'>
                           <div className='flex gap-2 items-center'>
                             <span className='text-sm text-gray-500'>
-                              {/* ngày thang  */}
                               {new Date(el?.date).toDateString()}
                             </span>
 
                             <span className='px-2 py-0.5 text-center text-sm rounded-full bg-violet-100 text-violet-700 font-semibold'>
-                              {/* tên công việc  */}
                               {el?.tag}
                             </span>
                           </div>
-                            {/* tên mô tả nhiệm vụ  */}
+
                           <p className='text-gray-700'>{el?.title}</p>
                         </div>
                       </div>
@@ -227,7 +207,6 @@ const TaskDetails = () => {
                 <p className='text-lg font-semibold'>ASSETS</p>
 
                 <div className='w-full grid grid-cols-2 gap-4'>
-                  {/* duyệt lấy tài nguyên trong task  */}
                   {task?.assets?.map((el, index) => (
                     <img
                       key={index}
@@ -247,22 +226,21 @@ const TaskDetails = () => {
         )}
       </Tabs>
     </div>
-  );
-};
+  )
+}
 
 const Activities = ({ activity, id }) => {
-  const [selected, setSelected] = useState(act_types[0]); // giá trị khởi tạo là obj comple, to to...
+  const [selected, setSelected] = useState(act_types[0]);
   const [text, setText] = useState("");
   const isLoading = false;
 
   const handleSubmit = async () => {};
 
-  const Card = ({ item }) => { // item là activate trong task api fake
+  const Card = ({ item }) => {
     return (
       <div className='flex space-x-4'>
         <div className='flex flex-col items-center flex-shrink-0'>
           <div className='w-10 h-10 flex items-center justify-center'>
-            {/* task-activate -> start, assgn,.. */}
             {TASKTYPEICON[item?.type]}
           </div>
           <div className='w-full flex items-center'>
@@ -271,15 +249,11 @@ const Activities = ({ activity, id }) => {
         </div>
 
         <div className='flex flex-col gap-y-1 mb-8'>
-          {/* đi tới activate tham chiếu đến người dùng tham chiếu bằng trường by  */}
           <p className='font-semibold'>{item?.by?.name}</p>
           <div className='text-gray-500 space-y-2'>
-            {/* kiểu công việc trong activate  */}
             <span className='capitalize'>{item?.type}</span>
-            {/* lấy ngày giờ của activate trong task fake  */}
             <span className='text-sm'>{moment(item?.date).fromNow()}</span>
           </div>
-          {/* nội dụng hành hành động trong activate -tasks api fake  */}
           <div className='text-gray-700'>{item?.activity}</div>
         </div>
       </div>
@@ -292,7 +266,6 @@ const Activities = ({ activity, id }) => {
         <h4 className='text-gray-600 font-semibold text-lg mb-5'>Activities</h4>
 
         <div className='w-full'>
-          {/* duyệt activate trong task api  */}
           {activity?.map((el, index) => (
             <Card
               key={index}
@@ -308,7 +281,6 @@ const Activities = ({ activity, id }) => {
           Add Activity
         </h4>
         <div className='w-full flex flex-wrap gap-5'>
-          {/* duyệt kiểu nhiệm vụ - start, todo, in prog  */}
           {act_types.map((item, index) => (
             <div key={item} className='flex gap-2 items-center'>
               <input
@@ -342,4 +314,5 @@ const Activities = ({ activity, id }) => {
     </div>
   );
 };
-export default TaskDetails;
+
+export default TaskDetails
