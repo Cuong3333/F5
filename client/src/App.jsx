@@ -137,7 +137,6 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/healthInfo' element={<HealthInfo />} />
         <Route path='/home' element={<Home />} />
-
       </Routes>
 
       {/* thư viện để thông báo toàn trang web */}

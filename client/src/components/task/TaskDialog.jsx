@@ -4,7 +4,7 @@ import { Menu, Transition } from "@headlessui/react";
 //component task
 import AddTask from "./AddTask";
 import AddSubTask from "./AddSubTask";
-import ConfirmatioDialog from "../Dialogs";
+import ConfirmatioDialog from "../Dialogs"; // dialog xoa
 //icon
 import { AiTwotoneFolderOpen } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
@@ -19,7 +19,9 @@ const TaskDialog = ({ task }) => {
 
   const navigate = useNavigate();
 
-  const duplicateHandler = () => {};
+  const duplicateHanlder = () => {
+    console.log(task)
+  };
   const deleteClicks = () => {};
   const deleteHandler = () => {};
 

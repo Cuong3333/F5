@@ -7,8 +7,8 @@ import { getInitials } from "../utils";
 //component
 import Title from "../components/Title";
 import Button from "../components/Button";
-// import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
-// import AddUser from "../components/AddUser";
+import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
+import AddUser from "../components/AddUser";
 //icon
 import { IoMdAdd } from "react-icons/io";
 
@@ -127,24 +127,24 @@ const Users = () => {
         </div>
       </div>
 
-      {/* <AddUser
+      <AddUser
         open={open}
         setOpen={setOpen}
         userData={selected}
         key={new Date().getTime().toString()}
-      /> */}
+      />
 
-      {/* <ConfirmatioDialog
+      <ConfirmatioDialog
         open={openDialog}
         setOpen={setOpenDialog}
         onClick={deleteHandler}
-      /> */}
+      />
 
-      {/* <UserAction
+      <UserAction
         open={openAction}
         setOpen={setOpenAction}
         onClick={userActionHandler}
-      /> */}
+      />
     </>
   );
 };

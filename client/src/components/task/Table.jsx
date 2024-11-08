@@ -6,7 +6,7 @@ import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../../utils";
 
 import UserInfo from "../UserInfo";
 import Button from "../Button";
-// import ConfirmatioDialog from "../Dialogs";
+import ConfirmatioDialog from "../Dialogs"; // dialog xóa
 
 import { FaList } from "react-icons/fa";
 import { BiMessageAltDetail } from "react-icons/bi";
@@ -154,11 +154,11 @@ const Table = ({ tasks }) => {
       </div>
 
       {/* TODO */}
-      {/* <ConfirmatioDialog
+      <ConfirmatioDialog
         open={openDialog}
         setOpen={setOpenDialog}
         onClick={deleteHandler}
-      /> */}
+      />
     </>
   );
 };

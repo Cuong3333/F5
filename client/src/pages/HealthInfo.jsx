@@ -55,7 +55,6 @@ const HealthInfo = () => {
       </div>
       </div>
     </div>
-    
   );
 }
 
