@@ -1,0 +1,70 @@
+Đi bộ nhanh hoặc chạy bộ: Tốt cho hệ tim mạch và giảm căng thẳng.
+Tập yoga hoặc thiền: Giúp giảm căng thẳng và cải thiện tinh thần.
+Đạp xe: Tốt cho sức khỏe tim mạch và cải thiện sức mạnh cơ bắp.
+Tập thể hình: Phát triển cơ bắp và tăng cường thể lực.
+Tham gia lớp nhảy hoặc zumba: Vừa vận động vừa giải trí, tốt cho sức khỏe tim mạch.
+
+User: xin chào
+Bot: Chào bạn Bien! Nếu bạn có bất kỳ câu hỏi nào về sức khỏe, dinh dưỡng hay cách duy trì một lối sống lành mạnh, hãy cứ hỏi mình nhé. Mình ở đây để giúp bạn!
+
+User: xin chào
+Bot: Xin chào! Tôi có thể giúp gì cho bạn hôm nay liên quan đến sức khỏe hay dinh dưỡng?
+
+User: xin chào
+Bot: Chào bạn! Tôi có thể giúp gì cho bạn hôm nay không?
+
+User: xx
+Bot: Dựa trên thông tin từ các trang web uy tín, đây là một số điều bạn có thể xem xét để duy trì sức khỏe và cân nặng hợp lý:
+
+1. Chế độ ăn uống lành mạnh:
+   
+- Ăn ít nhất 5 phần trái cây và rau quả mỗi ngày.
+   
+- Tiêu thụ ngũ cốc nguyên hạt thay vì ngũ cốc tinh chế.
+   
+- Kiểm soát lượng chất béo, chọn chất béo không bão hòa như dầu ô liu.
+
+2. Hạn chế tiêu thụ muối và đường:
+   
+- Giữ lượng muối dưới 5g mỗi ngày.
+   
+- Đường nên chiếm ít hơn 10% tổng năng lượng tiêu thụ hàng ngày.
+
+3. Theo dõi lượng calo và chất dinh dưỡng:
+   
+- Sử dụng phần mềm quản lý ăn uống để xác định nhu cầu calo.
+   
+- Duy trì cân bằng giữa lượng calo nạp vào và tiêu thụ.
+
+4. Thói quen ăn uống khoa học để giảm cân:
+   
+- Bổ sung thực phẩm giàu chất xơ, protein từ thịt trắng và đạm thực vật.
+   
+- Chia nhỏ bữa ăn thành 5-6 lần mỗi ngày để kiểm soát lượng calo nạp vào.
+   
+- Tránh thực phẩm chế biến sẵn và đồ uống có chứa nhiều đường.
+
+5. Lối sống và hoạt động thể chất:
+   
+- Duy trì ít nhất 30 phút thể dục thể thao mỗi ngày.
+   
+- Uống đủ nước, ít nhất 2 lít nước mỗi ngày để đảm bảo quá trình chuyển hóa.
+
+6. Tư vấn chuyên gia:
+   
+- Nên hỏi ý kiến bác sĩ hoặc chuyên gia dinh dưỡng trước khi áp dụng kế hoạch giảm cân lớn hơn.
+
+Những thông tin này có thể giúp hướng dẫn bạn về một chế độ ăn uống và lối sống lành mạnh hơn, phù hợp với độ tuổi và tình trạng sức khỏe hiện tại của bạn.
+
+User: xin chào
+Bot: Xin chào! Làm thế nào tôi có thể hỗ trợ bạn hôm nay?
+
+User: hello
+Bot: Xin chào! Là trợ lý sức khỏe của bạn, tôi có thể giúp gì cho bạn hôm nay?
+
+User: xin chào
+Bot: Chào bạn! Bạn cần tôi giúp gì hôm nay?
+
+User: xin chào
+Bot: Chào bạn! Tôi có thể giúp gì cho bạn về sức khỏe hôm nay?
+

@@ -6,7 +6,7 @@ from typing import List, Optional
 class StageType(str, Enum):
     completed = "completed"
     start = "start"
-    inProgress = "in progress"
+    inProgress = "in_progress"
 
 class PriorityType(str, Enum):
     high = "high"

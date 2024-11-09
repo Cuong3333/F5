@@ -1,0 +1,185 @@
+:root {
+  --primaryColor: hsl(94, 59%, 56%);
+  --hoverColor: hsl(93, 75%, 76%);
+  --bgColor: hsl(113, 11%, 85%);
+  --userMessageBg: #0084ff;
+  --botMessageBg: #e4e6eb;
+  --userTextColor: #fff;
+  --botTextColor: #000;
+  --timeColor: rgba(0, 0, 0, 0.5);
+  --whiteColor: hsl(0, 0%, 100%);
+  --shadowColor: rgba(0, 0, 0, 0.2);
+  --borderColor: #ddd;
+  --padding: 16px;
+  --radius: 10px;
+  --textColor: hsl(0, 0%, 18%);
+}
+
+/* Áp dụng box-sizing để đảm bảo kích thước hợp lý */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Container tổng của ChatBox */
+.chatbox {
+  width: 100%;
+  max-width: 1100px; /* Giới hạn kích thước tối đa */
+  height: 750px;
+  background: var(--whiteColor);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 8px var(--shadowColor);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  color: var(--textColor);
+  margin: 20px auto; /* Căn giữa ngang */
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+/* Header của ChatBox */
+.chatbox header {
+  background: var(--primaryColor);
+  padding: var(--padding);
+  text-align: center;
+  color: var(--whiteColor);
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+
+/* Khu vực tin nhắn */
+.messages {
+  flex: 1;
+  padding: var(--padding);
+  background-color: var(--bgColor);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Tin nhắn người dùng */
+.message.user {
+  align-self: flex-end;
+  background-color: var(--userMessageBg);
+  color: var(--userTextColor);
+  border-radius: 18px 18px 0 18px;
+  padding: 10px 15px;
+  max-width: 70%;
+  position: relative;
+  box-shadow: 0 2px 4px var(--shadowColor);
+}
+
+/* Tin nhắn bot */
+.message.bot {
+  align-self: flex-start;
+  background-color: var(--botMessageBg);
+  color: var(--botTextColor);
+  border-radius: 18px 18px 18px 0;
+  padding: 10px 15px;
+  max-width: 70%;
+  position: relative;
+  box-shadow: 0 2px 4px var(--shadowColor);
+}
+
+/* Timestamp */
+.message .time {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--timeColor);
+  margin-top: 4px;
+  text-align: right;
+  opacity: 0.7;
+}
+
+/* Khu vực nhập liệu */
+.input-container {
+  display: flex;
+  gap: 10px;
+  padding: var(--padding);
+  border-top: 1px solid var(--borderColor);
+  background: var(--whiteColor);
+  align-items: center;
+}
+
+/* Textarea */
+.input-container textarea {
+  flex: 1;
+  height: 45px;
+  padding: 10px;
+  border: 1px solid var(--borderColor);
+  border-radius: var(--radius);
+  resize: none;
+  outline: none;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.voice-button {
+  font-size: 1rem; /* Kích thước mặc định */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.voice-button.recording {
+  font-size: 0.75rem; /* Kích thước nhỏ hơn khi ghi âm */
+}
+
+/* Nút ghi âm và gửi */
+.voice-button, .send-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  color: var(--primaryColor);
+  transition: transform 0.2s, color 0.2s;
+}
+
+.voice-button:hover, .send-button:hover {
+  transform: scale(1.2);
+  color: var(--hoverColor);
+}
+
+/* Nút Yes/No cho tác vụ */
+.task-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.task-buttons button {
+  padding: 8px 15px;
+  background-color: var(--primaryColor);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.task-buttons button:hover {
+  background-color: var(--hoverColor);
+}
+
+.user-response {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: var(--primaryColor);
+}
+
+/* Đảm bảo responsive trên các thiết bị nhỏ hơn */
+@media (max-width: 600px) {
+  .chatbox {
+      height: 100%; /* Cho phép mở rộng toàn màn hình trên điện thoại */
+      max-width: 100%;
+      margin: 0; /* Bỏ khoảng cách */
+  }
+}
