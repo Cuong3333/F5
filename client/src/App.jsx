@@ -5,7 +5,7 @@ import { Fragment, useRef } from "react";
 import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"; // sử dụng để đi vào store lấy trạng thái xác thực thông tin người dùng
 //pages
-import Login from "./pages/Login"
+import Login from "./pages/Login.jsx"
 import Dashboard from "./pages/Dashboard"
 import Tasks from './pages/Task';
 import Trash from './pages/Trash';

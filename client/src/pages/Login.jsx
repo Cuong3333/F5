@@ -1,9 +1,16 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Textbox from "../components/Textbox";
 import Button from "../components/Button";
+//thong báo
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import stylesheet
+
+import { useLoginMutation } from '../redux/slices/api/authApiSlice'; // Đảm bảo import đúng
+import { setCredentials } from "../redux/slices/authSlice";
+import Loading from "../components/Loader";
 
 
 const Login = () => {
@@ -12,9 +19,9 @@ const Login = () => {
   //  đang truy cập vào phần auth trong Redux store. Đây có thể là một reducer hoặc một phần của trạng thái trong store, nơi thông tin liên quan đến quá trình xác thực (như thông tin người dùng, trạng thái đăng nhập, token, v.v.) được lưu trữ.
   //giúp bạn lấy thông tin người dùng từ phần auth trong trạng thái Redux store. Sau khi thực thi, user sẽ chứa thông tin người dùng nếu có (chẳng hạn như khi người dùng đã đăng nhập).
   //Câu lệnh này rất hữu ích để kiểm tra trạng thái đăng nhập của người dùng, ví dụ như chuyển hướng người dùng đến trang dashboard nếu họ đã đăng nhập thành công.
-  // const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+  // const user =''
 
-  const user = "";
 
   const {
     register,
@@ -24,11 +31,40 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const submitHandler = async (data) => {
-    console.log("submit");
+  const [login, {isLoading}] = useLoginMutation() // isLoading true khi đang yêu cầu api, fase khi hoàn thành yêu cầu api
+
+  const dispatch = useDispatch();
+
+  // sử dụng hook form gọi call back này để xử lý onsubmit
+  const submitHandler = async (data) => { // data là dữ liệu người dùng nhập và gửi đi
+    const requestData = { // định dạng lại dữ liệu gui đi 
+      username: data.email, // vì backend sử dụng OAuth2PasswordRequestForm nên trường phải là username
+      password: data.password
+    };
+
+    try {
+      const result = await login(requestData);  // Gửi request đăng nhập
+    
+      if (result && result.data && result.data.access_token) {
+        // Trả về thông tin người dùng và token
+        const { access_token, user } = result.data;
+    
+        // Dispatch action để lưu token và thông tin người dùng vào Redux state
+        dispatch(setCredentials({ token: access_token, user }));
+    
+        // Lưu token và thông tin người dùng vào localStorage
+        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("user", JSON.stringify(user));  // Lưu thông tin người dùng vào localStorage
+      } else {
+        toast.error("Login failed. No token received.");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.data?.message || error?.message || "An error occurred during login");
+    }
+    
   };
 
-  console.log(user)
 
   // nếu người dùng đã đăng nhập thì cấp lại quyền truy cấp
   useEffect(() => {
@@ -98,11 +134,18 @@ const Login = () => {
                 Forget Password?
               </span>
 
-              <Button
-                type='submit'
-                label='Submit'
-                className='w-full h-10 bg-blue-700 text-white rounded-full'
-              />
+              {isLoading ? (
+                <Loading/> // true thì gọi components loading đợi api
+              ) : ( // hoàn thành yêu cầu api 
+                <Button
+                  type='submit'
+                  label='Submit'
+                  className='w-full h-10 bg-blue-700 text-white rounded-full'
+                />
+              )}
+              
+              
+              
             </div>
           </form>
         </div>

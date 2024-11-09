@@ -1,6 +1,3 @@
-# app/User/auth.py
-
-import logging
 from fastapi import Depends, status, HTTPException, APIRouter
 from sqlalchemy.orm import Session
 from ...conn import get_db
@@ -10,6 +7,7 @@ from ...utilities import oauth2
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 
 # Thiết lập logging
+import logging
 logger = logging.getLogger(__name__)
 
 router = APIRouter(
@@ -26,23 +24,35 @@ def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session =
 
     # Kiểm tra người dùng có tồn tại hay không
     if not user:
-        logger.warning(f"Login failed for username: {user_credentials.username} - User not found")
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Invalid authentication credentials."
+            status_code=401,
+            detail="Invalid credentials",  # Trả về lỗi 401 nếu thông tin sai
         )
     
     # Kiểm tra mật khẩu có đúng không
     if not hash_password.verify_password(user_credentials.password, user.hashed_password):
         logger.warning(f"Login failed for username: {user_credentials.username} - Incorrect password")
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
+            status_code=status.HTTP_401_UNAUTHORIZED,  # Sử dụng 401 thay vì 403
             detail="Invalid authentication credentials."
         )
-    
+
     # Tạo token truy cập
     access_token = oauth2.create_access_token(data={"user_id": str(user.id)})
     logger.info(f"Login successful for username: {user_credentials.username}")
-    
-    # Trả về token truy cập
-    return {"access_token": access_token, "token_type": "bearer"}
+
+    # Trả về thông tin người dùng kèm theo token
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user": {
+            "id": user.id,
+            "email": user.email,
+            "name": user.name,
+            "title": user.title,
+            "created_at": user.created_at,
+            "updated_at": user.updated_at,
+            "isActivate": user.is_activate,
+            "isAdmin": user.isAdmin
+        }
+    }

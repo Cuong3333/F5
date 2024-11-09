@@ -13,7 +13,9 @@ class UpdateUserProfile(BaseModel):
     role: Optional[str]
 
 # Tạo Router FastAPI
-router = APIRouter()
+router = APIRouter(
+    tags=["update profile"]
+)
 
 @router.put("/update-profile", status_code=status.HTTP_200_OK)
 async def update_user_profile(

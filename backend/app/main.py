@@ -24,13 +24,12 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
-# Thêm middleware CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*", "https://well-green.btecit.tech", "https://be-well-green.btecit.tech"],  # Bạn có thể thay đổi "*" thành danh sách các miền cụ thể nếu cần
+    allow_origins=["http://localhost:3000", "https://well-green.btecit.tech", "https://be-well-green.btecit.tech"],  # Các miền này sẽ được phép truy cập
     allow_credentials=True,
-    allow_methods=["*"],  # Cho phép tất cả các phương thức
-    allow_headers=["*"],  # Cho phép tất cả các headers
+    allow_methods=["*"],  # Cho phép tất cả các phương thức HTTP (GET, POST, DELETE,...)
+    allow_headers=["*"],  # Cho phép tất cả các header
 )
 
 Base.metadata.create_all(bind=engine)

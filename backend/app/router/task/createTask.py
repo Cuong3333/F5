@@ -64,6 +64,7 @@ def create_task(
             "priority": new_task_with_details.priority,
             "assets": [{"id": asset.id, "url": asset.url} for asset in assets],
             "teams": [{"user_id": team_member.user_id} for team_member in team_members]
+
         }
 
     except Exception as e:

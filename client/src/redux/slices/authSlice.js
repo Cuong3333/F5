@@ -1,34 +1,36 @@
-//authSlice (authSlice) chịu trách nhiệm quản lý trạng thái người dùng (như dữ liệu người dùng và trạng thái sidebar). Nó theo dõi người dùng hiện tại, lưu thông tin đăng nhập vào localStorage và cung cấp các actions để đăng nhập, đăng xuất và thay đổi trạng thái sidebar.
 import { createSlice } from "@reduxjs/toolkit";
-import { user } from "../../assets/data";
 
+// Lấy token từ localStorage khi khởi tạo state
 const initialState = {
-  user: localStorage.getItem("userInfo")
-    ? JSON.parse(localStorage.getItem("userInfo"))
-    : user,
-
-  isSidebarOpen: false,
+  token: localStorage.getItem("access_token") || null, // Kiểm tra token trong localStorage
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  isSidebarOpen: false, // Trạng thái ban đầu của sidebar
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: { // lưu thông tin người dùng vào local để vẫn đăng nhập lần sau khi làm mới trang
+  reducers: {
     setCredentials: (state, action) => {
-      state.user = action.payload;
-      localStorage.setItem("userInfo", JSON.stringify(action.payload));
+      state.token = action.payload.token;  // Lưu token vào state
+      state.user = action.payload.user;    // Lưu thông tin người dùng vào state
+      // Lưu token và user vào localStorage
+      localStorage.setItem("access_token", action.payload.token);
+      localStorage.setItem("user", JSON.stringify(action.payload.user));  // Lưu thông tin người dùng vào localStorage
     },
-    logout: (state, action) => { // dùng để đăng suất xóa user ra khỏi local đặt user thành null
-      state.user = null;
-      localStorage.removeItem("userInfo");
+    logout: (state) => {
+      state.token = null;  // Xóa token khỏi state
+      state.user = null;   // Xóa thông tin người dùng khỏi state
+      localStorage.removeItem("access_token");  // Xóa token khỏi localStorage
+      localStorage.removeItem("user");          // Xóa thông tin người dùng khỏi localStorage
+
     },
-    setOpenSidebar: (state, action) => { // dùng để thay đổi trang thái của sileBar mở hay đóng
-      state.isSidebarOpen = action.payload;
+    setOpenSidebar: (state, action) => {
+      state.isSidebarOpen = action.payload;  // Cập nhật trạng thái của sidebar
     },
   },
 });
 
-//Các action creators như setCredentials, logout, và setOpenSidebar được tạo tự động bởi createSlice. Các action này có thể được gọi trong các component để thay đổi trạng thái của Redux.
+// Xuất các actions và reducer
 export const { setCredentials, logout, setOpenSidebar } = authSlice.actions;
-
 export default authSlice.reducer;

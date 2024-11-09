@@ -15,7 +15,8 @@ import {
 } from "recharts";
 
 // data
-import { chartData } from "../assets/data";
+import { chartData } from "../assets/data"; 
+
 
 // Component Chart tạo ra một biểu đồ cột có thể thay đổi kích thước tùy theo container của nó. Biểu đồ hiển thị thông tin từ chartData, với các thành phần hỗ trợ như trục X, trục Y, tooltip, legend và lưới. Đây là cách đơn giản để trực quan hóa dữ liệu trong ứng dụng React.
 export const Chart = () => {
