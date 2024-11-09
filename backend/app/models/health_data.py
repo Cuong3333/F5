@@ -7,7 +7,6 @@ class HealthData(Base):
     __tablename__ = "health_data"
     
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), unique=True)  # Quan hệ 1-1, user_id phải là unique
 
     weight = Column(Float)
     height = Column(Float)
@@ -24,4 +23,5 @@ class HealthData(Base):
     date = Column(Date, default=func.current_date())
 
     # Quan hệ ngược lại với User
+    user_id = Column(Integer, ForeignKey("users.id"), unique=True)  # Quan hệ 1-1, user_id phải là unique
     user = relationship("User", back_populates="health_data")
