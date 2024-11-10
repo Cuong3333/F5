@@ -29,3 +29,5 @@ class User(Base):
 
      # Quan hệ 1-1 với HealthData (1 User có 1 HealthData)
     health_data = relationship("HealthData", back_populates="user", uselist=False)
+    posts = relationship("Post", back_populates="owner")
+    likes = relationship("PostLike", back_populates="user")

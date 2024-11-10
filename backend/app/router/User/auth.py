@@ -56,3 +56,28 @@ def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session =
             "isAdmin": user.isAdmin
         }
     }
+# F5/backend/app/router/User/auth.py
+
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
+from sqlalchemy.orm import Session
+from ...conn import get_db
+from ...models.user import User
+from ...utilities.oauth2 import verify_access_token  # Hàm xác thực token
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
+
+def get_curent_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    token_data = verify_access_token(token, credentials_exception)
+    user = db.query(User).filter(User.id == token_data.id).first()
+    if user is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+    return user
