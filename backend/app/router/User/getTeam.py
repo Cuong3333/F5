@@ -38,3 +38,35 @@ def get_my_team(current_user: User = Depends(get_curent_user), db: Session = Dep
             status_code=400,
             detail=str(e)
         )
+
+@router.delete("/team/{team_member_id}", response_model=dict)
+def delete_team_member(team_member_id: int, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    try:
+        # Lấy thành viên nhóm dựa trên team_member_id
+        team_member = db.query(TeamMember).filter(TeamMember.id == team_member_id).first()
+
+        # Kiểm tra xem thành viên nhóm có tồn tại không
+        if not team_member:
+            raise HTTPException(
+                status_code=404,
+                detail="Team member not found"
+            )
+
+        # Kiểm tra quyền sở hữu: chỉ có thể xóa thành viên thuộc nhóm của người dùng hiện tại
+        if team_member.user_id != current_user.id:
+            raise HTTPException(
+                status_code=403,
+                detail="You do not have permission to delete this team member"
+            )
+
+        # Xóa thành viên khỏi cơ sở dữ liệu
+        db.delete(team_member)
+        db.commit()
+
+        return {"detail": "Team member deleted successfully"}
+    
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"An error occurred: {str(e)}"
+        )

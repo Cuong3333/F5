@@ -11,12 +11,20 @@ import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
 import AddUser from "../components/AddUser";
 //icon
 import { IoMdAdd } from "react-icons/io";
+import { useGetTeamListQuery, useDeleteUserMutation } from "../redux/slices/api/userApiSlice";
 
 const Users = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [open, setOpen] = useState(false);
   const [openAction, setOpenAction] = useState(false);
   const [selected, setSelected] = useState(null);
+
+  
+  // Gọi API để lấy dữ liệu đội
+  const { data, error, isLoading } = useGetTeamListQuery();
+
+  const [deleteUser] = useDeleteUserMutation()
+
 
   const userActionHandler = () => {};
   const deleteHandler = () => {};
@@ -59,7 +67,7 @@ const Users = () => {
 
       <td className='p-2'>{user.title}</td>
       <td className='p-2'>{user.email || "user.emal.com"}</td>
-      <td className='p-2'>{user.role}</td>
+      {/* <td className='p-2'>{user.role}</td> */}
 
       <td>
         <button
@@ -118,7 +126,7 @@ const Users = () => {
               <TableHeader />
               <tbody>
                 {/* vào api fake data lấy user và duyệt đưa lên giao diện */}
-                {summary.users?.map((user, index) => (
+                {data?.map((user, index) => (
                   <TableRow key={index} user={user} />
                 ))}
               </tbody>

@@ -1,3 +1,4 @@
+import Registerr from "../../../pages/Register";
 import { apiSlice } from "../apiSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
@@ -13,7 +14,25 @@ export const authApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+
+    register: builder.mutation({
+      query: (data) => ({
+        url: `/register`,
+        method: "POST",
+        body: data, // Dữ liệu JSON
+        credentials: "include",
+      }),
+    }),    
+
+    logout: builder.mutation({
+      query: () => ({
+        url: `/logout`,
+        method: "POST",
+        credentials: "include",  // Đảm bảo gửi cookie kèm theo yêu cầu (nếu có)
+      }),
+    }),
+
   }),
 });
 
-export const { useLoginMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApiSlice;

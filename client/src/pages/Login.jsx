@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import Textbox from "../components/Textbox";
 import Button from "../components/Button";
 //thong báo
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import stylesheet
 
 import { useLoginMutation } from '../redux/slices/api/authApiSlice'; // Đảm bảo import đúng
@@ -59,8 +59,7 @@ const Login = () => {
         toast.error("Login failed. No token received.");
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error?.data?.message || error?.message || "An error occurred during login");
+      toast.error('Something went wrong')
     }
     
   };
@@ -131,7 +130,7 @@ const Login = () => {
               />
 
               <span className='text-sm text-gray-500 hover:text-blue-600 hover:underline cursor-pointer'>
-                Forget Password?
+                <Link to="/register">Register here</Link>
               </span>
 
               {isLoading ? (

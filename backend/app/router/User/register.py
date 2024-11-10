@@ -42,7 +42,7 @@ def create_user(user_create: UserCreate, db: Session = Depends(get_db)):
 
         logger.info(f"User registered successfully with email: {user_create.email}, ID: {new_user.id}")
         
-        return {"id": new_user.id, "email": new_user.email, "created_at": new_user.created_at, "name": new_user.name}
+        return {'Tạo tài khoản thành công !!!'}
 
     except HTTPException as http_exc:
         # Log and re-raise HTTP exceptions explicitly raised

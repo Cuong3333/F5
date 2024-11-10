@@ -5,7 +5,7 @@ const API_URI = "http://localhost:8000";
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URI,
   prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth?.user?.token; // Lấy token từ Redux store
+    const token = getState().auth?.token; // Lấy token từ Redux store
     if (token) {
       headers.set("Authorization", `Bearer ${token}`); // Thêm token vào headers
     }

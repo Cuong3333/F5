@@ -7,6 +7,9 @@ import { getInitials } from "../utils"; // sử lý tên người dùng
 //icons
 import { FaUser, FaUserLock } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
+import { toast } from "sonner";
+import { useLogoutMutation } from "../redux/slices/api/authApiSlice";
+import { logout } from "../redux/slices/authSlice";
 
 const UserAvatar = () => {
   // kiểm tra trạng thái
@@ -19,9 +22,17 @@ const UserAvatar = () => {
   // điều hướng
   const navigate = useNavigate();
 
-  const logoutHandler = () => {
-    dispatch(logout()); // Action logout cần được định nghĩa
-    navigate('/login'); // Điều hướng đến trang đăng nhập
+  const [logoutUser] = useLogoutMutation()
+
+  const logoutHandler = async() => {
+    try {
+      const result = await logoutUser().unwrap();
+      dispatch(logout())
+      navigate("/log-in")
+
+    } catch (error) {
+      toast.error('Something went wrong')
+    }
   };
 
   return (
