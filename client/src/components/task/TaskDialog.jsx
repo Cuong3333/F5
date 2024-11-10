@@ -12,7 +12,13 @@ import { HiDuplicate } from "react-icons/hi";
 import { MdAdd, MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
+import { toast } from "sonner";
+
+//api
+import { useDeleteTaskMutation } from "../../redux/slices/api/taskApiSlice";
+
 const TaskDialog = ({ task }) => {
+
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
@@ -22,14 +28,41 @@ const TaskDialog = ({ task }) => {
   const duplicateHanlder = () => {
     console.log(task)
   };
-  const deleteClicks = () => {};
-  const deleteHandler = () => {};
+
+
+  // api xóa
+  const [deleteTask] = useDeleteTaskMutation();
+
+  const deleteClicks = () => {
+    setOpenDialog(true); // mở dialog xác nhaannj xóa
+  };
+
+
+  const deleteHandler = async () => {
+    try {
+      const response = await deleteTask(task.id).unwrap(); // Gọi API xóa task
+      setTimeout(() => {
+        setOpenDialog(false); // Đóng dialog sau 0,5 giây
+      }, 500);
+      
+      // Hiển thị thông báo thành công
+      toast.success(response?.message || "Task deleted successfully!"); // Kiểm tra nếu có message từ backend
+  
+    } catch (error) {
+      console.error("Error deleting task:", error);
+  
+      // Kiểm tra nếu error là một đối tượng và có thuộc tính message
+      const errorMessage = (error && error.message) || "Failed to delete task"; // Nếu không có message, hiển thị thông báo lỗi mặc định
+      toast.error(errorMessage); // Hiển thị thông báo lỗi
+    }
+  };
+  
 
   const items = [
     {
       label: "Open Task",
       icon: <AiTwotoneFolderOpen className='mr-2 h-5 w-5' aria-hidden='true' />,
-      onClick: () => navigate(`/task/${task._id}`),
+      onClick: () => navigate(`/task/${task.id}`),
     },
     {
       label: "Edit",

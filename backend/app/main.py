@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware  # Thêm import này
 from .conn import Base, engine
-from .models import user, team, task, subTask, posts, assets, activities, events, health_data
+from .models import user, task, subTask, posts, events, health_data
 from .router.User import router as user_router
 from .router.task import router as task_router
 

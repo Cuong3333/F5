@@ -24,8 +24,5 @@ class User(Base):
     # Quan hệ 1-n với Task (1 User có thể có nhiều nhiệm vụ)
     tasks = relationship("Task", back_populates="user")
 
-     # Quan hệ 1-n với TeamMember (1 User có thể có nhiều thành viên nhóm)
-    teams = relationship("TeamMember", back_populates="user")
-
      # Quan hệ 1-1 với HealthData (1 User có 1 HealthData)
     health_data = relationship("HealthData", back_populates="user", uselist=False)

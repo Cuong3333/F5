@@ -27,7 +27,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
             method: "DELETE",            
             }),
         }), 
+
+        getNotification: builder.query({
+          query: () => ({
+          url: `/Notification`,           // Đường dẫn API để lấy danh sách đội
+          method: "GET",             // Phương thức GET
+          }),
+      }), 
     }),
   });
 
-export const{useUpdateUserMutation, useGetTeamListQuery, useDeleteUserMutation}  = userApiSlice
+export const{useUpdateUserMutation, useGetTeamListQuery, useDeleteUserMutation, useGetNotificationQuery}  = userApiSlice

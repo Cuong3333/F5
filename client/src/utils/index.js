@@ -48,7 +48,7 @@ export const PRIOTITYSTYELS = {
 // Định nghĩa các màu nền tùy theo trạng thái nhiệm vụ (todo, in progress, completed).
 // Giúp dễ dàng phân biệt các nhiệm vụ dựa trên trạng thái, bằng cách thay đổi màu nền.
 export const TASK_TYPE = {
-  todo: "bg-blue-600",
+  start: "bg-blue-600",
   "in progress": "bg-yellow-600",
   completed: "bg-green-600",
 };

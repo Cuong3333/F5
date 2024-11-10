@@ -9,7 +9,7 @@ router = APIRouter(
     tags=['delete task']
 )
 
-@router.delete("/tasks/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/delete_tasks/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_task(
     task_id: int,
     db: Session = Depends(get_db),
@@ -25,26 +25,11 @@ async def delete_task(
         )
     
     try:
-        # Xóa các đối tượng liên quan đến task trong một transaction
-        # Xóa các TeamMember
-        for team_member in task.teams:
-            db.delete(team_member)
-        
-        # Xóa các Asset
-        for asset in task.assets:
-            db.delete(asset)
-        
         # Xóa các SubTask (nếu có)
         for sub_task in task.sub_tasks:
             db.delete(sub_task)
-        
-        # Xóa các Activities (nếu có)
-        for activity in task.activities:
-            db.delete(activity)
-
         # Xóa nhiệm vụ chính
         db.delete(task)
-        
         # Lưu thay đổi vào database
         db.commit()
 
@@ -55,4 +40,4 @@ async def delete_task(
             detail=f"An error occurred while deleting the task: {str(e)}"
         )
 
-    return {"detail": "Task and related objects have been deleted"}
+    return {"detail": "Task and related objects have been deleted", 'message': 'deleted successfull !!'}

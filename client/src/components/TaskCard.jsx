@@ -48,7 +48,7 @@ const TaskCard = ({ task }) => {
           </div>
           
           {/* thông tin người dung sem có phải là admin không phải thì sử dụng TaskDialog */}
-          {user?.isAdmin && <TaskDialog task={task} />}
+          {<TaskDialog task={task} />}
           
         </div>
 
@@ -70,6 +70,7 @@ const TaskCard = ({ task }) => {
 
         <div className='w-full border-t border-gray-200 my-2' />
 
+              {/* team  */}
         <div className='flex items-center justify-between mb-2'>
           {/* đôi diện với team */}
           <div className='flex items-center gap-3'>
@@ -118,10 +119,15 @@ const TaskCard = ({ task }) => {
             </h5>
 
             <div className='p-4 space-x-8'>
+
               <span className='text-sm text-gray-600'>
                 {/* hiển thị ngày của nhiệm vụ phụ */}
-                {formatDate(new Date(task?.subTasks[0]?.date))}
+                {/* {formatDate(new Date(task?.subTasks[0]?.date))} */}
+
+                {/* ngày của nhiệm vụ phụ */}
+
               </span>
+
               <span className='bg-blue-600/10 px-3 py-1 rounded0full text-blue-700 font-medium'>
                 {/* hiển thị tag trong nhiệm vụ phụ */}
                 {task?.subTasks[0].tag}
@@ -151,7 +157,7 @@ const TaskCard = ({ task }) => {
         </div>
       </div>
 
-      <AddSubTask open={open} setOpen={setOpen} id={task._id} />
+      <AddSubTask open={open} setOpen={setOpen} id={task.id} />
     </>
   );
 };

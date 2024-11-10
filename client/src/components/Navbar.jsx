@@ -1,16 +1,27 @@
-import React from "react";
+
 import { MdOutlineSearch } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // gọi redux xử lý action
 import { setOpenSidebar } from "../redux/slices/authSlice";
 import UserAvatar from "./UserAvatar";
 import NotificationPanel from "./NotificationPanel";
 
+// api
+// import { useGetNotificationQuery } from "../redux/slices/api/userApiSlice";
+
+
+
 const Navbar = () => {
   // kiểm tra thông tin trạng thái người dùng
-  const { user } = useSelector((state) => state.auth);
+  // const { user } = useSelector((state) => state.auth);
   // sử dụng để gửi action vào store để sử lý
   const dispatch = useDispatch();
+
+  // const {data, error, isLoading } = useGetNotificationQuery();
+
+  // if (isLoading) return <div>Loading...</div>;
+
+  // if (error) return <div>Error loading notifications</div>;
 
   return (
     <div className='flex justify-between items-center bg-white px-4 py-3 2xl:py-4 sticky z-10 top-0'>

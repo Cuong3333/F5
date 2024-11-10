@@ -22,9 +22,6 @@ async def get_user_tasks(
         tasks = query.options(
             # Load các bảng liên quan
             joinedload(Task.sub_tasks),
-            joinedload(Task.teams),
-            joinedload(Task.assets),
-            joinedload(Task.activities),
         ).all()
 
         # Nếu không có nhiệm vụ nào, trả về thông báo lỗi
@@ -32,7 +29,6 @@ async def get_user_tasks(
             raise HTTPException(status_code=404, detail="No tasks found for this user")
 
         return {
-            "status": True,
             "tasks": tasks
         }
 

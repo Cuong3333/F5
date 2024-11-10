@@ -1,4 +1,3 @@
-import React from "react";
 import moment from "moment"; // thư viện ngày tháng
 import { summary } from "../assets/data"; // giả lập api
 import clsx from "clsx"; // viết logic trong class
@@ -12,7 +11,7 @@ import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
 
 //icon
 import { LuClipboardEdit } from "react-icons/lu";
-import { FaNewspaper, FaUsers } from "react-icons/fa";
+import { FaNewspaper } from "react-icons/fa";
 import { FaArrowsToDot } from "react-icons/fa6";
 import {
   MdAdminPanelSettings,
@@ -20,6 +19,10 @@ import {
   MdKeyboardArrowUp,
   MdKeyboardDoubleArrowUp,
 } from "react-icons/md";
+
+//api 
+import { useGetDashboardStartsQuery } from "../redux/slices/api/taskApiSlice";
+import Loading from '../components/Loader'
 
 //Hiển thị bảng icon các nhiệm vụ với các cột như tiêu đề nhiệm vụ, độ ưu tiên, đội ngũ và ngày tạo.
 const TaskTable = ({ tasks }) => {
@@ -70,7 +73,7 @@ const TaskTable = ({ tasks }) => {
       </td>
 
       {/* Cột thứ ba - Nhóm làm việc */}
-      <td className='py-2'>
+      {/* <td className='py-2'>
         <div className='flex'>
           {task.team.map((m, index) => (
             <div
@@ -84,7 +87,7 @@ const TaskTable = ({ tasks }) => {
             </div>
           ))}
         </div>
-      </td>
+      </td> */}
 
       {/* Cột thứ tư - Ngày tạo nhiệm vụ */}
       <td className='py-2 hidden md:block'>
@@ -181,35 +184,64 @@ const Dashboard = () => {
   
   // thành phần chính chứa các thẻ thống kê (cards) hiển thị tổng số nhiệm vụ, nhiệm vụ hoàn thành, nhiệm vụ đang thực hiện, và các công việc cần làm (todos).
   // vào file data lấy api giả của tasks
+
+  const { data, isLoading } = useGetDashboardStartsQuery();
+
+  // Nếu đang tải dữ liệu, hiển thị thông báo "Loading..."
+  if (isLoading) {
+    <div className="py-10">
+      <Loading/>
+    </div>
+  }
+
+
+  // Nếu data không tồn tại hoặc không có tasks, xử lý mặc định
+  const tasksData = data?.tasks || [];
+
+  
+
+  // Tính tổng số nhiệm vụ hoàn thành (complete)
+  const tasks_complete = tasksData?.filter(task => task.stage === 'completed').length || 0;
+
+
+  const tasks_inProgress = tasksData?.filter(task => task.stage === 'in progress').length || 0;
+
+  const tasks_start = tasksData?.filter(task => task.stage === 'start').length || 0;
+
+  // console.log(totalss);
+
+  console.log(tasksData?.sub_tasks);  // Kiểm tra độ dài của tasks
+
   const totals = summary.tasks;
+
 
   // lẩy ra tổng nhiệm vụ và thông tin cần thiết cho top dashboard
   const stats = [
     {
       _id: "1",
       label: "TOTAL TASK",
-      total: summary?.totalTasks || 0, // lấy tổng nhiệm vụ trong file data
+      total: tasksData?.length || 0, // lấy tổng nhiệm vụ trong file data
       icon: <FaNewspaper />,
       bg: "bg-[#1d4ed8]",
     },
     {
       _id: "2",
-      label: "COMPLTED TASK",
-      total: totals["completed"] || 0, // tổng nhiệm vụ hoàn thành
+      label: "COMPLETED",
+      total: tasks_complete || 0, // tổng nhiệm vụ hoàn thành
       icon: <MdAdminPanelSettings />,
       bg: "bg-[#0f766e]",
     },
     {
       _id: "3",
       label: "TASK IN PROGRESS ",
-      total: totals["in progress"] || 0, // tổng nhiệm vụ đang làm
+      total: tasks_inProgress || 0, // tổng nhiệm vụ đang làm
       icon: <LuClipboardEdit />,
       bg: "bg-[#f59e0b]",
     },
     {
       _id: "4",
-      label: "TODOS",
-      total: totals["todo"] || 0, // tổng nhiệm vụ của mình
+      label: "START",
+      total: tasks_start || 0, // tổng nhiệm vụ của mình
       icon: <FaArrowsToDot />,
       bg: "bg-[#be185d]" || 0,
     },
@@ -261,7 +293,7 @@ const Dashboard = () => {
       <div className='w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8'>
         
         {/*bên dưới phía /left */}
-        <TaskTable tasks={summary.last10Task} />
+        <TaskTable />
 
         {/*bên dưới phía /right */}
         <UserTable users={summary.users} />

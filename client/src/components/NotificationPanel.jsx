@@ -8,41 +8,44 @@ import { BiSolidMessageRounded } from "react-icons/bi";
 import { HiBellAlert } from "react-icons/hi2";
 import { IoIosNotificationsOutline } from "react-icons/io";
 
-const data = [
-  {
-    _id: "65c5bbf3787832cf99f28e6d",
-    team: [
-      "65c202d4aa62f32ffd1303cc",
-      "65c27a0e18c0a1b750ad5cad",
-      "65c30b96e639681a13def0b5",
-    ],
-    text: "New task has been assigned to you and 2 others. The task priority is set a normal priority, so check and act accordingly. The task date is Thu Feb 29 2024. Thank you!!!",
-    task: null,
-    notiType: "alert",
-    isRead: [],
-    createdAt: "2024-02-09T05:45:23.353Z",
-    updatedAt: "2024-02-09T05:45:23.353Z",
-    __v: 0,
-  },
-  {
-    _id: "65c5f12ab5204a81bde866ab",
-    team: [
-      "65c202d4aa62f32ffd1303cc",
-      "65c30b96e639681a13def0b5",
-      "65c317360fd860f958baa08e",
-    ],
-    text: "New task has been assigned to you and 2 others. The task priority is set a high priority, so check and act accordingly. The task date is Fri Feb 09 2024. Thank you!!!",
-    task: {
-      _id: "65c5f12ab5204a81bde866a9",
-      title: "Test task",
-    },
-    notiType: "alert",
-    isRead: [],
-    createdAt: "2024-02-09T09:32:26.810Z",
-    updatedAt: "2024-02-09T09:32:26.810Z",
-    __v: 0,
-  },
-];
+import { useGetNotificationQuery } from "../redux/slices/api/userApiSlice";
+
+
+// const data = [
+//   {
+//     _id: "65c5bbf3787832cf99f28e6d",
+//     team: [
+//       "65c202d4aa62f32ffd1303cc",
+//       "65c27a0e18c0a1b750ad5cad",
+//       "65c30b96e639681a13def0b5",
+//     ],
+//     text: "New task has been assigned to you and 2 others. The task priority is set a normal priority, so check and act accordingly. The task date is Thu Feb 29 2024. Thank you!!!",
+//     task: null,
+//     notiType: "alert",
+//     isRead: [],
+//     createdAt: "2024-02-09T05:45:23.353Z",
+//     updatedAt: "2024-02-09T05:45:23.353Z",
+//     __v: 0,
+//   },
+//   {
+//     _id: "65c5f12ab5204a81bde866ab",
+//     team: [
+//       "65c202d4aa62f32ffd1303cc",
+//       "65c30b96e639681a13def0b5",
+//       "65c317360fd860f958baa08e",
+//     ],
+//     text: "New task has been assigned to you and 2 others. The task priority is set a high priority, so check and act accordingly. The task date is Fri Feb 09 2024. Thank you!!!",
+//     task: {
+//       _id: "65c5f12ab5204a81bde866a9",
+//       title: "Test task",
+//     },
+//     notiType: "alert",
+//     isRead: [],
+//     createdAt: "2024-02-09T09:32:26.810Z",
+//     updatedAt: "2024-02-09T09:32:26.810Z",
+//     __v: 0,
+//   },
+// ];
 
 const ICONS = {
   alert: (
@@ -54,7 +57,13 @@ const ICONS = {
 };
 
 const NotificationPanel = () => {
+
+  const {data} = useGetNotificationQuery();
+
+  console.log(data)
+
   const [open, setOpen] = useState(false);
+
   const [selected, setSelected] = useState(null);
 
   //  const { data, refetch } = useGetNotificationsQuery();
@@ -77,14 +86,24 @@ const NotificationPanel = () => {
     <>
       <Popover className='relative'>
         <Popover.Button className='inline-flex items-center outline-none'>
-          <div className='w-8 h-8 flex items-center justify-center text-gray-800 relative'>
+
+          <div className="w-8 h-8 flex items-center justify-center text-gray-800 relative">
+          <IoIosNotificationsOutline className="text-2xl" />
+            {data?.total_incomplete > 0 && (
+              <span className="absolute text-center top-0 right-1 text-sm text-white font-semibold w-4 h-4 rounded-full bg-red-600">
+                {data?.total_incomplete}
+              </span>
+            )}
+          </div>
+
+          {/* <div className='w-8 h-8 flex items-center justify-center text-gray-800 relative'>
             <IoIosNotificationsOutline className='text-2xl' />
             {data?.length > 0 && (
               <span className='absolute text-center top-0 right-1 text-sm text-white font-semibold w-4 h-4 rounded-full bg-red-600'>
                 {data?.length}
               </span>
             )}
-          </div>
+          </div> */}
         </Popover.Button>
 
         <Transition
@@ -101,13 +120,13 @@ const NotificationPanel = () => {
               data?.length > 0 && (
                 <div className='w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5'>
                   <div className='p-4'>
-                    {data?.slice(0, 5).map((item, index) => (
+                    {data?.slice(0, 5).map((item) => (
                       <div
-                        key={item._id + index}
+                        key={item}
                         className='group relative flex gap-x-4 rounded-lg p-4 hover:bg-gray-50'
                       >
                         <div className='mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-gray-200 group-hover:bg-white'>
-                          {ICONS[item.notiType]}
+                          {ICONS['message']}
                         </div>
 
                         <div
@@ -115,20 +134,26 @@ const NotificationPanel = () => {
                           onClick={() => viewHandler(item)}
                         >
                           <div className='flex items-center gap-3 font-semibold text-gray-900 capitalize'>
-                            <p> {item.notiType}</p>
-                            <span className='text-xs font-normal lowercase'>
+                            <p>Notification</p>
+                            {/* <span className='text-xs font-normal lowercase'>
                               {moment(item.createdAt).fromNow()}
-                            </span>
+                            </span> */}
                           </div>
+
+
                           <p className='line-clamp-1 mt-1 text-gray-600'>
-                            {item.text}
+                            {item.total_incomplete}
                           </p>
+
+
+
                         </div>
+
                       </div>
                     ))}
                   </div>
 
-                  <div className='grid grid-cols-2 divide-x bg-gray-50'>
+                  {/* <div className='grid grid-cols-2 divide-x bg-gray-50'>
                     {callsToAction.map((item) => (
                       <Link
                         key={item.name}
@@ -140,7 +165,7 @@ const NotificationPanel = () => {
                         {item.name}
                       </Link>
                     ))}
-                  </div>
+                  </div> */}
                 </div>
               )
             }

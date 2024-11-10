@@ -16,6 +16,9 @@ import { IoMdAdd } from "react-icons/io";
 import { FaList } from "react-icons/fa";
 import { MdGridView } from "react-icons/md";
 
+//api
+import { useGetDashboardStartsQuery } from "../redux/slices/api/taskApiSlice.js";
+
 const TABS = [
   { title: "Board View", icon: <MdGridView /> },
   { title: "List View", icon: <FaList /> },
@@ -40,8 +43,13 @@ const Tasks = () => {
   const status = params?.status || ""; //Nếu params?.status là undefined hoặc null, phần || "" sẽ cung cấp giá trị mặc định là chuỗi rỗng "".
 
 
+  // api 
+  const {data, isLoading} = useGetDashboardStartsQuery()
+
+  console.log(data?.tasks)
+
   // nếu chưa tải nội dung thì hiển thị biểu tượng loading
-  return loading ? (
+  return isLoading ? (
 
     // {/* compunents này xử lý khi người dùng click nếu chưa tải trang thì sẽ có biểu tượng loading */}
     <div className='py-10'>
@@ -78,7 +86,7 @@ const Tasks = () => {
           <div className='w-full flex justify-between gap-4 md:gap-x-12 py-4'>
             
             {/* lấy màu của todo  */}
-            <TaskTitle label='To Do' className={TASK_TYPE.todo} />
+            <TaskTitle label='Start' className={TASK_TYPE.todo} />
 
               {/* màu của in prog  */}
             <TaskTitle
@@ -95,11 +103,11 @@ const Tasks = () => {
         
         {selected !== 1 ? ( // đây là điều kiện để xem xem dạng bảng hay xem dạng list
           // 
-          <BoardView tasks={tasks} />
+          <BoardView tasks={data?.tasks} />
 
         ) : (
           <div className='w-full'>
-            <Table tasks={tasks} />
+            <Table tasks={data?.tasks} />
           </div>
         )}
 

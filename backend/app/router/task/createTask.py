@@ -1,72 +1,50 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from ...models.task import Task
-from ...models.assets import Asset
-from ...models.team import TeamMember
-from ...models.user import User
-from ...schema.task import TaskCreate
-from ...utilities.oauth2 import get_curent_user
-from ...conn import get_db
+from ...models.task import Task  # Model Task từ models của bạn
+from ...models.user import User  # Model User từ models của bạn
+from ...schema.task import TaskCreate  # Schema Pydantic để validate dữ liệu đầu vào
+from ...utilities.oauth2 import get_curent_user  # Hàm để lấy user hiện tại
+from ...conn import get_db  # Hàm để lấy kết nối DB
 
 router = APIRouter(
     tags=["Task"]
 )
 
-@router.post("/tasks/", status_code=status.HTTP_201_CREATED)
+@router.post("/create_tasks/", status_code=status.HTTP_201_CREATED)
 def create_task(
     task_create: TaskCreate,  # Schema xác thực dữ liệu đầu vào
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db),  # Kết nối cơ sở dữ liệu
     current_user: User = Depends(get_curent_user)  # Lấy user hiện tại từ token
 ):
     try:
-        # Tạo task mới
+        # Tạo task mới từ dữ liệu đầu vào
         new_task = Task(
-            title=task_create.title,
-            stage=task_create.stage,
-            date=task_create.date,
-            priority=task_create.priority,
-            user_id=current_user.id  # Gắn task với người dùng hiện tại
+            title=task_create.title,  # Tiêu đề của task
+            stage=task_create.stage,  # Giai đoạn của task (Enum)
+            priority=task_create.priority,  # Độ ưu tiên của task (Enum)
+            user_id=current_user.id  # Gán task cho user hiện tại
         )
-        
+
+        # Thêm task vào phiên làm việc của SQLAlchemy
         db.add(new_task)
+        # Commit để lưu task vào database
         db.commit()
+        # Refresh để lấy lại đối tượng task với ID mới được tạo từ DB
         db.refresh(new_task)
 
-        # Thêm assets (nếu có)
-        for asset_url in task_create.assets:
-            asset = Asset(url=asset_url, task_id=new_task.id)
-            db.add(asset)
-
-        # Thêm team (nếu có) với các trường name, title, email
-        for team_member in task_create.teams:
-            team_member_record = TeamMember(
-                task_id=new_task.id, 
-                name=team_member.name, 
-                title=team_member.title, 
-                email=team_member.email, 
-                user_id=team_member.user_id  # Nếu cần user_id trong schema TeamMemberCreate, bạn có thể thêm vào
-            )
-            db.add(team_member_record)
-
-        db.commit()
-
-        # Lấy lại tất cả dữ liệu liên quan đến task
-        new_task_with_details = db.query(Task).filter(Task.id == new_task.id).first()
-        assets = db.query(Asset).filter(Asset.task_id == new_task.id).all()
-        team_members = db.query(TeamMember).filter(TeamMember.task_id == new_task.id).all()
-
-        # Trả về tất cả thông tin đã lưu
+        # Trả về thông tin chi tiết của task vừa tạo
         return {
-            "id": new_task_with_details.id,
-            "title": new_task_with_details.title,
-            "stage": new_task_with_details.stage,
-            "date": new_task_with_details.date,
-            "priority": new_task_with_details.priority,
-            "assets": [{"id": asset.id, "url": asset.url} for asset in assets],
-            "teams": [{"user_id": team_member.user_id} for team_member in team_members]
-
+            "id": new_task.id,
+            "title": new_task.title,
+            "date": new_task.date,
+            "priority": new_task.priority,
+            "stage": new_task.stage,
+            "user_id": new_task.user_id,
+            "message": "Task created successfully!"  # Thêm thông báo ở đây
         }
 
     except Exception as e:
+        # Rollback nếu có lỗi xảy ra
         db.rollback()
+        # Trả về thông báo lỗi HTTP 500 cùng với chi tiết lỗi
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))

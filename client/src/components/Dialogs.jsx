@@ -13,10 +13,14 @@ export default function ConfirmatioDialog({
   type = "delete",
   setType = () => {},
 }) {
+  
   const closeDialog = () => {
+    // Tránh gọi setOpen(true) nếu modal đã mở
+    if (!open) return; // Kiểm tra tránh gọi vô hạn
+  
     setType("delete");
     setMsg(null);
-    setOpen(false);
+    setOpen(false); // Chỉ đóng khi cần thiết
   };
 
   return (

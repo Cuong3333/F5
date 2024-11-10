@@ -27,9 +27,6 @@ async def get_task_details(
     # Lấy tất cả các dữ liệu liên quan đến nhiệm vụ
     task_with_details = db.query(Task).filter(Task.id == task_id).options(
         joinedload(Task.sub_tasks),
-        joinedload(Task.teams),
-        joinedload(Task.activities),
-        joinedload(Task.assets)
     ).first()
 
     return task_with_details
