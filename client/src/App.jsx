@@ -13,8 +13,8 @@ import TaskDetails from "./pages/TaskDetails";
 import Users from "./pages/Users";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
-import HealthInfo from "./pages/HealthInfo";
 import ChatBot from "./pages/ChatBot";
+import UserProfile from "./pages/UserProfile" ;
 
 //components
 import Sidebar from './components/Sidebar';
@@ -135,8 +135,8 @@ function App() {
 
         <Route path='/log-in' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/healthInfo' element={<HealthInfo />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/UserProfile' element={<UserProfile />} />
       </Routes>
 
       {/* thư viện để thông báo toàn trang web */}
