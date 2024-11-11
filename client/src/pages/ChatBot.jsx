@@ -4,6 +4,9 @@ import { FaMicrophone } from "react-icons/fa";
 import axios from 'axios';
 import '../css/ChatBox.css';
 
+
+import Tree from '../components/DecorativeTree/Tree';
+
 const ChatBox = ({ onAddTask }) => {
   const [messages, setMessages] = useState([]);
   const [transcript, setTranscript] = useState("");
@@ -126,50 +129,67 @@ const ChatBox = ({ onAddTask }) => {
     setMessages(updatedMessages);
   };
   
-  
-  
-  
-  
 
   return (
-    <div className="chatbox">
-      <header>ChatBot</header>
-      
-      <div className="messages">
-        {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.sender}`}>
-            <span dangerouslySetInnerHTML={{ __html: msg.text }} />
-            
-            {msg.is_task && !msg.user_response && (
-              <div className="task-buttons">
-                <button onClick={() => handleTaskResponse(index, "Yes")}>Yes</button>
-                <button onClick={() => handleTaskResponse(index, "No")}>No</button>
+    <div className="flex flex-col sm:flex-col md:flex-row h-[800px] w-full md:w-[1200px]">
+      {/* Phần bên trái */}
+      <div className="w-full sm:w-full md:w-[1100px] bg-gray-200 overflow-auto">
+        {/* Nội dung bên trái */}
+
+        <div className="chatbox">
+          <header>ChatBot</header>
+          
+          <div className="messages">
+            {messages.map((msg, index) => (
+              <div key={index} className={`message ${msg.sender}`}>
+                <span dangerouslySetInnerHTML={{ __html: msg.text }} />
+                
+                {msg.is_task && !msg.user_response && (
+                  <div className="task-buttons">
+                    <button onClick={() => handleTaskResponse(index, "Yes")}>Yes</button>
+                    <button onClick={() => handleTaskResponse(index, "No")}>No</button>
+                  </div>
+                )}
+                
+                {msg.user_response && (
+                  <div className="user-response">
+                    <strong>Response: </strong>{msg.user_response}
+                  </div>
+                )}
               </div>
-            )}
-            
-            {msg.user_response && (
-              <div className="user-response">
-                <strong>Response: </strong>{msg.user_response}
-              </div>
-            )}
+            ))}
           </div>
-        ))}
+          
+          <div className="input-container">
+            <textarea
+              value={transcript}
+              onChange={handleInputChange}
+              placeholder="Nhập tin nhắn..."
+            ></textarea>
+            
+            <button onClick={toggleRecording} className="voice-button">
+              {isRecording ? '🔴 Recording...' : <FaMicrophone size={20} />}
+            </button>
+            
+            <button onClick={sendMessage} className="send-button">
+              <GrSend />
+            </button>
+          </div>
+        </div>
+
       </div>
-      
-      <div className="input-container">
-        <textarea
-          value={transcript}
-          onChange={handleInputChange}
-          placeholder="Nhập tin nhắn..."
-        ></textarea>
-        
-        <button onClick={toggleRecording} className="voice-button">
-          {isRecording ? '🔴 Recording...' : <FaMicrophone size={20} />}
-        </button>
-        
-        <button onClick={sendMessage} className="send-button">
-          <GrSend />
-        </button>
+
+      {/* Phần bên phải */}
+      <div className="w-full sm:w-full md:w-1/2 flex flex-col bg-blue-300">
+        {/* Phần bên trên */}
+        <div className="h-[300px] w-full sm:w-full md:max-w-[350px] md:mx-auto">
+          <Tree />
+        </div>
+
+        {/* Phần bên dưới */}
+        <div className="flex-grow bg-green-200 overflow-y-auto" style={{ maxHeight: '500px' }}>
+          {/* Nội dung phần dưới */}
+        </div>
       </div>
     </div>
   );

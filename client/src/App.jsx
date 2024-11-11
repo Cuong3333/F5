@@ -97,7 +97,7 @@ const MobileSidebar = () => {
             <div className="bg-white w-[50%] h-full rounded-[8px] transform transition-all duration-700">
               <div className="w-full flex justify-end px-5 mt-5">
                 <button
-                  onClick={() => closeSidebar()}
+                  onClick={() => closeSidebar()}                            
                   className="flex justify-end items-end"
                 >
                   <IoClose size={25} />
