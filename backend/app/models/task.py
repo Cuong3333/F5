@@ -12,10 +12,10 @@ class Task(Base):
     date = Column(DateTime, default=datetime.utcnow)
     
     # Sử dụng String cho mức độ ưu tiên (priority) và đặt mặc định là 'normal'
-    priority = Column(String, default="normal")
+    priority = Column(String, default="NORMAL")
     
     # Sử dụng String cho giai đoạn của công việc (stage) và đặt mặc định là 'inProgress'
-    stage = Column(String, default="inProgress")
+    stage = Column(String, default="INPROGRESS")
     
     is_trashed = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)

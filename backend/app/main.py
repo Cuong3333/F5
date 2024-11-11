@@ -17,6 +17,7 @@ from .conn import Base, engine, get_db
 from .models import user, task, subTask, posts, events
 from .models.user import User
 from .models.task import Task
+from .models.UserProfile import  UserProfile
 from .router.User import router as user_router
 from .router.task import router as task_router
 
@@ -114,7 +115,7 @@ def suggest_exercise_activity():
         "- Tham gia lớp nhảy hoặc zumba: Vừa vận động vừa giải trí, tốt cho sức khỏe tim mạch."
     )
 
-def generate_response(user_input, web_contents, health_data):
+def generate_response(user_input, web_contents, User_Profile):
     """Generates response based on user input, web contents, and health data."""
     health_keywords = ["sức khỏe", "tốt cho sức khỏe", "hoạt động thể thao", "tập luyện", "thể dục"]
 
@@ -129,11 +130,10 @@ def generate_response(user_input, web_contents, health_data):
     # Combine content from web and health data
     combined_content = "\n\n".join([f"Nội dung từ {url}:\n{content}" for url, content in web_contents.items() if content])
     health_info = (
-        f"Cân nặng của tôi là {health_data.weight} kg, chiều cao là {health_data.height} cm, "
-        f"huyết áp hiện tại là {health_data.blood_pressure}, nhịp tim là {health_data.heart_rate} bpm, "
-        f"thời gian ngủ trung bình {health_data.sleep_hours} giờ, lượng nước uống mỗi ngày là {health_data.water_intake} lít, "
-        f"mức độ hoạt động thể chất là {health_data.activity_level}. "
-    ) if health_data else ""
+        f"Tôi tên là {User_Profile.name}.Năm nay tôi {User_Profile.age} tuổi. Cân nặng của tôi là {User_Profile.weight} kg, chiều cao là {User_Profile.height} cm, "
+        f"Mục tiêu của tôi đối với sức khỏe của tôi là {User_Profile.goal}. Giới tính của tôi là {User_Profile.gender} . Tôi đang có tiền sử bệnh {User_Profile.health_history}"
+        
+    ) if User_Profile else ""
 
     prompt = f"{combined_content}\n\nCâu hỏi của người dùng: {user_input}"
 
@@ -176,13 +176,16 @@ def convert_audio_to_wav(input_file_path: str, output_file_path: str):
 @app.post("/chat", response_class=JSONResponse)
 async def chat(user_input: str = Form(...), current_user: User = Depends(get_curent_user), db: Session = Depends(get_db)):
     """Handles user chat input."""
-    health_data = db.query(HealthData).filter(HealthData.user_id == current_user.id).first()
+
+    User_Profile = db.query(UserProfile).filter(UserProfile.user_id == current_user.id).first()
+
+
     web_contents = store_web_contents()
     
     if not web_contents:
         return JSONResponse({"error": "Failed to fetch web contents."}, status_code=500)
 
-    response_messages, _ = generate_response(user_input, web_contents, health_data)
+    response_messages, _ = generate_response(user_input, web_contents, User_Profile)
     
     return {"messages": response_messages}
 
@@ -200,3 +203,71 @@ async def chat_voice(voice: UploadFile = File(...)):
         return JSONResponse({"message": f"Audio converted successfully: {output_audio_path}"})
     else:
         return JSONResponse({"error": "Failed to convert audio."}, status_code=500)
+
+
+from fastapi.responses import FileResponse
+from typing import List
+@app.get("/history")
+async def get_history():
+    try:
+        if not os.path.exists(HISTORY_FOLDER):
+            return JSONResponse(content={"message": "No history data found."})
+
+        history_data = []
+        # Duyệt qua tất cả thư mục và file trong `HISTORY_FOLDER`
+        for root, _, files in os.walk(HISTORY_FOLDER):
+            for file_name in files:
+                if file_name.endswith(".txt"):
+                    file_path = os.path.join(root, file_name)
+                    with open(file_path, 'r', encoding="utf-8") as file:
+                        # Thêm thông tin ngày tháng và nội dung vào dữ liệu
+                        date = os.path.basename(root)
+                        history_data.append({"date": date, "content": file.read()})
+
+        if not history_data:
+            return JSONResponse(content={"message": "No history data available."})
+
+        return JSONResponse(content=history_data)
+
+    except Exception as e:
+        print(f"Error retrieving history data: {e}")
+        raise HTTPException(status_code=500, detail="Error retrieving history data.")
+    
+from fastapi import Body
+from .models.task import Task  # Import Task model from the task module
+from .models.user import User
+from sqlalchemy.orm import Session
+from .conn import engine, sessionLocal  
+from datetime import datetime
+
+
+
+# Endpoint để lưu Task mới
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+@app.post("/save-task")
+async def save_task(
+    title: str = Body(..., embed=True),  # Thêm embed=True để mong đợi "title" là một trường trực tiếp trong JSON
+    current_user: User = Depends(get_curent_user),  
+    db: Session = Depends(get_db)
+):  
+    try:
+        # Tạo task mới và gắn user_id của người dùng hiện tại
+        new_task = Task(
+            title=title,
+            user_id=current_user.id,
+            date=datetime.utcnow(),
+            priority="normal",
+            stage="in progress",
+            is_trashed=False,
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow()
+        )
+        db.add(new_task)
+        db.commit()
+        db.refresh(new_task)
+        logger.info("Task saved successfully!")
+        return {"message": "Task saved successfully!"}
+    except Exception as e:
+        logger.error(f"Error saving task: {e}")  # Log chi tiết lỗi
+        raise HTTPException(status_code=500, detail="Failed to save task")

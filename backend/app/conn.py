@@ -12,7 +12,7 @@ load_dotenv()
 
 # connStr = 'postgresql://postgres:Cuong2603@localhost:5432/WellGreen2'
 
-connStr = 'postgresql://postgres:0979171860sang@localhost:5432/BestCoder5'
+connStr = 'postgresql://postgres:password@localhost:5432/BestCoder5'
 
 
 engine = create_engine(connStr)

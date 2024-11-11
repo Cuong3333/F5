@@ -93,7 +93,7 @@ const MobileSidebar = () => {
               isSidebarOpen ? 'block' : 'hidden'
             )}
             onClick={() => closeSidebar()}
-          >
+          > 
             <div className="bg-white w-[50%] h-full rounded-[8px] transform transition-all duration-700">
               <div className="w-full flex justify-end px-5 mt-5">
                 <button

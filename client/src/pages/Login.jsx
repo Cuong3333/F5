@@ -65,6 +65,8 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(user));  // Lưu thông tin người dùng vào localStorage
 
         toast.success(result?.message || "Login successfully!"); // Kiểm tra nếu có message từ backend
+
+        window.location.reload();
       } else {
         toast.error("Email or password failed");
       }
