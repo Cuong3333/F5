@@ -193,3 +193,18 @@ Tham gia lớp nhảy hoặc zumba: Vừa vận động vừa giải trí, tốt
 User: xin chào bạn
 Bot: Chào Cuong! Tôi có thể giúp gì cho bạn hôm nay? Nếu bạn cần tư vấn về chế độ ăn uống hoặc bất kỳ điều gì liên quan đến sức khỏe, hãy cho tôi biết nhé!
 
+Đi bộ nhanh hoặc chạy bộ: Tốt cho hệ tim mạch và giảm căng thẳng.
+Tập yoga hoặc thiền: Giúp giảm căng thẳng và cải thiện tinh thần.
+Đạp xe: Tốt cho sức khỏe tim mạch và cải thiện sức mạnh cơ bắp.
+Tập thể hình: Phát triển cơ bắp và tăng cường thể lực.
+Tham gia lớp nhảy hoặc zumba: Vừa vận động vừa giải trí, tốt cho sức khỏe tim mạch.
+
+User: xin chào
+Bot: Chào bạn! Tôi có thể giúp gì cho bạn hôm nay?
+
+Đi bộ nhanh hoặc chạy bộ: Tốt cho hệ tim mạch và giảm căng thẳng.
+Tập yoga hoặc thiền: Giúp giảm căng thẳng và cải thiện tinh thần.
+Đạp xe: Tốt cho sức khỏe tim mạch và cải thiện sức mạnh cơ bắp.
+Tập thể hình: Phát triển cơ bắp và tăng cường thể lực.
+Tham gia lớp nhảy hoặc zumba: Vừa vận động vừa giải trí, tốt cho sức khỏe tim mạch.
+

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { tasks } from "../assets/data";
 import Loading from "../components/Loader.jsx";
 import Title from "../components/Title";
 import Button from "../components/Button";
@@ -25,7 +24,7 @@ const TASK_TYPE = {
   completed: "bg-green-600",
 };
 
-const Tasks = ({ triggerRefetch, isListView }) => {
+const Tasks = ({ triggerRefetch, isListView, isReadOnly }) => {
   const params = useParams();
   const [selected, setSelected] = useState(0);
   const [open, setOpen] = useState(false);
@@ -33,27 +32,24 @@ const Tasks = ({ triggerRefetch, isListView }) => {
 
   const { data, isLoading, refetch } = useGetDashboardStartsQuery();
 
-  // Sử dụng useEffect để gọi lại refetch khi triggerRefetch thay đổi
   useEffect(() => {
     if (triggerRefetch) {
       refetch();
     }
   }, [triggerRefetch, refetch]);
 
-  // Nếu isListView là true, chỉ hiển thị chế độ List View (Table)
   if (isListView) {
-    return isLoading ? (
+    return isLoading || !data?.tasks ? (
       <div className="py-10">
         <Loading />
       </div>
     ) : (
       <div className="w-full">
-        <Table tasks={data?.tasks} />
+        <Table tasks={data.tasks} isReadOnly={isReadOnly} />
       </div>
     );
   }
 
-  // Phần render mặc định khi không phải là List View
   return isLoading ? (
     <div className="py-10">
       <Loading />
@@ -85,7 +81,7 @@ const Tasks = ({ triggerRefetch, isListView }) => {
           <BoardView tasks={data?.tasks} />
         ) : (
           <div className="w-full">
-            <Table tasks={data?.tasks} />
+            <Table tasks={data.tasks} isReadOnly={isReadOnly} />
           </div>
         )}
       </Tabs>
@@ -96,7 +92,6 @@ const Tasks = ({ triggerRefetch, isListView }) => {
 };
 
 export default Tasks;
-
 
 
 // import React, { useState } from "react";
