@@ -10,7 +10,7 @@ load_dotenv()
 
 # connStr = os.getenv('DB_HOST')
 
-connStr = 'postgresql://postgres:0979171860sang@localhost:5432/BestCoder4'
+connStr = 'postgresql://postgres:password@localhost:5432/BestCoder4'
 
 engine = create_engine(connStr)
 

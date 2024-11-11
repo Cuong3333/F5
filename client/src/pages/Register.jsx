@@ -11,7 +11,7 @@ import { useRegisterMutation } from '../redux/slices/api/authApiSlice'; // Đả
 import Loading from "../components/Loader";
 import { toast } from "sonner";
 
-import video from '../assets/imgHome/video_Login.mp4'
+import video from '../assets/imgHome/video_login.mp4'
 
 
 const Registerr = () => {
