@@ -1,4 +1,4 @@
-
+import ConfettiButton from '../components/buttonClick/ButtonClickSnow';
 import { MdOutlineSearch } from "react-icons/md";
 import { useDispatch } from "react-redux";
 // gọi redux xử lý action
@@ -24,7 +24,7 @@ const Navbar = () => {
   // if (error) return <div>Error loading notifications</div>;
 
   return (
-    <div className='flex justify-between items-center bg-white px-4 py-3 2xl:py-4 sticky z-10 top-0'>
+    <div className='flex justify-between items-center bg-gradient-to-r from-[#c8e2c5] to-[#e7f5e5] px-4 py-3 2xl:py-4 sticky z-10 top-0'>
       <div className='flex gap-4'>
         <button
           onClick={() => dispatch(setOpenSidebar(true))} // gửi hành động click để sử lý hành động
@@ -45,6 +45,10 @@ const Navbar = () => {
       </div>
 
       <div className='flex gap-2 items-center'>
+
+        <ConfettiButton />
+
+
         {/* thông báo người dùng */}
         <NotificationPanel />
 

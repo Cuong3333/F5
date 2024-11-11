@@ -40,7 +40,7 @@ function Layout() {
 
   return user ? (
     <div className='w-full h-screen flex flex-col md:flex-row'>
-      <div className='w-1/5 h-screen bg-white sticky top-0 hidden md:block'>
+      <div className='w-1/5 h-screen bg-gradient-to-b from-[#c1e6bd] to-[#f0f3f0] sticky top-0 hidden md:block'>
         {/* thanh điều hướng bên trái */}
         <Sidebar /> 
       </div>
@@ -117,7 +117,7 @@ const MobileSidebar = () => {
 
 function App() {
   return (
-    <main className='w-full min-h-screen bg-[#f3f4f6] '>
+    <main className='w-full min-h-screen bg-gradient-to-b from-[#c8e2c5] to-[#f0f3f0] '>
       <Routes>
         <Route element={<Layout />}>
           <Route index path='/' element={<Navigate to='/chatbot' />} />

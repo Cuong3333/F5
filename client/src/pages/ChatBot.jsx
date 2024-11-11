@@ -1,4 +1,3 @@
-import React from 'react';
 import ConfettiButton from '../components/buttonClick/ButtonClickSnow';
 
 // https://www.kirilv.com/canvas-confetti/

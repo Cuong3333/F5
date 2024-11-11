@@ -57,14 +57,13 @@ const ButtonClickSnow = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-green-400 to-blue-500">
-      <div className="button-wrapper relative">
-        <button
-          className="confetti-button px-6 py-3 text-white text-lg font-semibold bg-green-500 rounded-lg cursor-pointer transition duration-300 ease-in-out hover:bg-green-600"
-          onClick={handleButtonClick}
-        >
-          {isConfetti ? 'Stop' : 'Yay'} {/* Hiển thị Stop khi confetti đang chạy */}
+    <div>
+      <div>
+
+        <button className="bg-transparent text-primaryColor py-2 px-6 rounded-full font-normal transition-all duration-300 transform hover:scale-105 hover:bg-[#b2f7ef] hover:border-[#b2f7ef] hover:text-black border-2 border-[#4CAF50]">
+          {isConfetti ? 'Stop' : 'Yay'}
         </button>
+
       </div>
     </div>
   );

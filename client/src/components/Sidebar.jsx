@@ -14,6 +14,7 @@ import {
   MdTaskAlt,
 } from "react-icons/md";
 import { SiRobotframework } from "react-icons/si";
+import { BiSolidLeaf } from "react-icons/bi";
 
 // link slidebar dùng để cho phép phân quyền
 const linkData = [
@@ -37,26 +38,7 @@ const linkData = [
     link: "completed/completed",
     icon: <MdTaskAlt />,
   },
-  {
-    label: "In Progress",
-    link: "in-progress/in progress",
-    icon: <MdOutlinePendingActions />,
-  },
-  {
-    label: "To Do",
-    link: "todo/todo",
-    icon: <MdOutlinePendingActions />,
-  },
-  {
-    label: "Team",
-    link: "team",
-    icon: <FaUsers />,
-  },
-  {
-    label: "Trash",
-    link: "trashed",
-    icon: <FaTrashAlt />,
-  },
+  
 ];
 
 const Sidebar = () => {
@@ -98,9 +80,9 @@ const Sidebar = () => {
     <div className='w-full  h-full flex flex-col gap-6 p-5'>
       <h1 className='flex gap-1 items-center'>
         <p className='bg-green-600 p-2 rounded-full'>
-          <MdOutlineAddTask className='text-white text-2xl font-black' />
+          <BiSolidLeaf className='text-white text-2xl font-black' />
         </p>
-        <span className='text-2xl font-bold text-black'>TaskMe</span>
+        <span className='text-2xl font-bold text-black'>WellG AI</span>
       </h1>
 
       <div className='flex-1 flex flex-col gap-y-5 py-8'>

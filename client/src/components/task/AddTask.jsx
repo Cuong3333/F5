@@ -130,7 +130,7 @@ const AddTask = ({ open, setOpen, task }) => {
               setSelected={handleStageChange} // Use updated handler
             />
 
-            <div className="w-full">
+            {/* <div className="w-full">
               <Textbox
                 placeholder="Date"
                 type="date"
@@ -140,7 +140,7 @@ const AddTask = ({ open, setOpen, task }) => {
                 register={register("date", { required: "Date is required!" })}
                 error={errors.date ? errors.date.message : ""}
               />
-            </div>
+            </div> */}
           </div>
 
           <div className="flex gap-4">

@@ -5,12 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import Textbox from "../components/Textbox";
 import Button from "../components/Button";
 //thong báo
-import { ToastContainer } from 'react-toastify';
+import { toast } from "sonner";
 import 'react-toastify/dist/ReactToastify.css'; // Import stylesheet
 
 import { useLoginMutation } from '../redux/slices/api/authApiSlice'; // Đảm bảo import đúng
 import { setCredentials } from "../redux/slices/authSlice";
 import Loading from "../components/Loader";
+
+
+// icon 
+import video from '../assets/imgHome/video_login.mp4';
+// css
+// import '../css/cssLogin.css';
 
 
 const Login = () => {
@@ -31,7 +37,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const [login, {isLoading}] = useLoginMutation() // isLoading true khi đang yêu cầu api, fase khi hoàn thành yêu cầu api
+  const [login, {isLoading}, error] = useLoginMutation() // isLoading true khi đang yêu cầu api, fase khi hoàn thành yêu cầu api
 
   const dispatch = useDispatch();
 
@@ -44,6 +50,8 @@ const Login = () => {
 
     try {
       const result = await login(requestData);  // Gửi request đăng nhập
+
+      
     
       if (result && result.data && result.data.access_token) {
         // Trả về thông tin người dùng và token
@@ -55,8 +63,10 @@ const Login = () => {
         // Lưu token và thông tin người dùng vào localStorage
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("user", JSON.stringify(user));  // Lưu thông tin người dùng vào localStorage
+
+        toast.success(result?.message || "Login successfully!"); // Kiểm tra nếu có message từ backend
       } else {
-        toast.error("Login failed. No token received.");
+        toast.error("Email or password failed");
       }
     } catch (error) {
       toast.error('Something went wrong')
@@ -74,21 +84,51 @@ const Login = () => {
     <div className='w-full min-h-screen flex items-center justify-center flex-col lg:flex-row bg-[#f3f4f6]'>
       <div className='w-full md:w-auto flex gap-0 md:gap-40 flex-col md:flex-row items-center justify-center'>
         {/* left side */}
-        <div className='h-full w-full lg:w-2/3 flex flex-col items-center justify-center'>
-          <div className='w-full md:max-w-lg 2xl:max-w-3xl flex flex-col items-center justify-center gap-5 md:gap-y-10 2xl:-mt-20'>
-            <span className='flex gap-1 py-1 px-3 border rounded-full text-sm md:text-base bordergray-300 text-gray-600'>
-              Manage all your task in one place!
+
+        {/* left side */}
+        <div className='h-[670px] w-[588.1px] lg:w-2/3 flex flex-col items-center justify-center relative '>
+          <video
+            className="absolute top-0 left-0 w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src={video} />
+            Your browser does not support the video tag.
+          </video>
+
+          <div className='relative w-full md:max-w-lg 2xl:max-w-3xl flex flex-col items-center justify-center gap-5 md:gap-y-10 2xl:-mt-20'>
+            <span className='flex gap-1 py-1 px-3 border rounded-full text-xs md:text-sm border-gray-300 text-[#2e2f2f] bg-[#e5e6e8]'>
+              Start Your Health Journey
             </span>
-            <p className='flex flex-col gap-0 md:gap-4 text-4xl md:text-6xl 2xl:text-7xl font-black text-center text-blue-700'>
-              <span>Cloud-Based</span>
-              <span>Task Manager</span>
+            <p className='flex flex-col gap-0 md:gap-4 text-4xl md:text-6xl 2xl:text-7xl font-black text-center text-[#cccdcd]'>
+              <span>SignIn &</span>
+              <span>Healthier Life</span>
             </p>
 
             <div className='cell'>
-              <div className='circle rotate-in-up-left'></div>
+              <div className='circle rotate-in-up-left bg-green-500'></div>  
             </div>
+
+
           </div>
+
+            <div className="footerDiv flex justify-between items-center px-4 py-2 bg-white/25 backdrop-blur-sm rounded-lg absolute bottom-[20px] left-[10px] mx-auto w-full max-w-[470px]">
+              <span className="text text-white">Don't have an account?</span>
+              <Link to={'/register'}>
+                <button className="bg-white text-primaryColor py-2 px-6 rounded-lg font-normal transition-all duration-300 transform hover:scale-105 hover:bg-[#68c26e] hover:border-[#b2f7ef] hover:text-black border-2 border-transparent">
+                  Sign Up?
+                </button>
+              </Link>
+            </div>
+
+          
+
         </div>
+
+
+
 
         {/* right side */}
         <div className='w-full md:w-1/3 p-4 md:p-1 flex flex-col justify-center items-center'>
@@ -97,10 +137,10 @@ const Login = () => {
             className='form-container w-full md:w-[400px] flex flex-col gap-y-8 bg-white px-10 pt-14 pb-14'
           >
             <div className=''>
-              <p className='text-blue-600 text-3xl font-bold text-center'>
+              <p className='text-green-800 text-3xl font-bold text-center'>
                 Welcome back!
               </p>
-              <p className='text-center text-base text-gray-700 '>
+              <p className='text-center text-base text-green-500 '>
                 Keep all your credential safge.
               </p>
             </div>
@@ -129,8 +169,8 @@ const Login = () => {
                 error={errors.password ? errors.password.message : ""}
               />
 
-              <span className='text-sm text-gray-500 hover:text-blue-600 hover:underline cursor-pointer'>
-                <Link to="/register">Register here</Link>
+              <span className='text-sm text-green-800 hover:text-green-400 hover:underline cursor-pointer'>
+                <Link to="/register">Forgot password</Link>
               </span>
 
               {isLoading ? (
@@ -139,7 +179,7 @@ const Login = () => {
                 <Button
                   type='submit'
                   label='Submit'
-                  className='w-full h-10 bg-blue-700 text-white rounded-full'
+                  className='w-full h-10 bg-green-500 text-white rounded-full'
                 />
               )}
               
