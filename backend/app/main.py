@@ -160,74 +160,23 @@ def generate_response(user_input: str, user_info: str, db, userId):
             completion = openai.ChatCompletion.create(
                 model="gpt-4",
                 messages=[
-                    {"role": "system", "content": f"Thông tin sức khỏe: {user_info}"},
-                    {"role": "user", "content": "Tạo 5 nhiệm vụ, mỗi nhiệm vụ phải có trường: title (tên kế hoạch tập luyện)"}
+                    {"role": "system", "content": f"Thông tin: {user_info}"},
+                    {"role": "user", "content": "Tạo 5 nhiệm vụ tập luyện. Bắt buộc phải ở dạng JSON: title:tên nhiệm vụ, timelàmnhiêmv:2024-11-12 14:30:00"}
                 ]
             )
             response_text = completion['choices'][0]['message']['content']
 
-            # Phân tích phản hồi và giả sử phản hồi từ OpenAI API sẽ là một JSON chứa các nhiệm vụ
             try:
-                # Giả sử phản hồi là một chuỗi JSON hợp lệ
-                try:
-                    tasks = json.loads(response_text)  # Cố gắng phân tích JSON
-                except json.JSONDecodeError as e:
-                    # Nếu phản hồi không phải là JSON hợp lệ, sử dụng nhiệm vụ mặc định và thông báo lỗi
-                    formatted_response = f"Sử dụng nhiệm vụ mặc định của tôi nhé!"
-                    formatted_tasks = [
-                        {
-                            "title": "Tập Cardio",
-                            "priority": "HIGH",
-                            "stage": "START"
-                        },
-                        {
-                            "title": "Tập sức mạnh",
-                            "priority": "MEDIUM",
-                            "stage": "INPROGRESS"
-                        },
-                        {
-                            "title": "Tập yoga",
-                            "priority": "NORMAL",
-                            "stage": "COMPLETED"
-                        },
-                        {
-                            "title": "Chạy bộ",
-                            "priority": "HIGH",
-                            "stage": "START"
-                        },
-                        {
-                            "title": "Tập thể dục với tạ",
-                            "priority": "NORMAL",
-                            "stage": "INPROGRESS"
-                        }
-                    ]
-                    
-                    # Lưu nhiệm vụ mặc định vào cơ sở dữ liệu
-                    for task in formatted_tasks:
-                        db_task = Task(
-                            title=task["title"],
-                            stage=task["stage"],
-                            priority=task["priority"],
-                            user_id=userId  # Lưu ID người dùng vào nhiệm vụ
-                        )
-                        db.add(db_task)
-
-                    # Commit để lưu vào cơ sở dữ liệu
-                    db.commit()
-
-                    # Trả về thông báo "Kế hoạch đã được tạo"
-                    formatted_response = "Kế hoạch đã được tạo, hãy tới nhiệm vụ và xem chi tiết nó nhé!"
-
-                    return [{"text": formatted_response, "is_task": False}], None
-
-                # Kiểm tra và chỉ lấy các trường cần thiết nếu phản hồi là JSON hợp lệ
-                if isinstance(tasks, list) and len(tasks) >= 5:
-                    formatted_tasks = []
-                    for task in tasks[:5]:  # Lấy tối đa 5 nhiệm vụ
+                # Kiểm tra nếu phản hồi có dạng JSON hợp lệ
+                tasks = json.loads(response_text.strip())
+                
+                # Kiểm tra nếu tasks là một danh sách hợp lệ
+                if isinstance(tasks, list):
+                    for task in tasks:
                         task_data = {
-                            "title": task.get("title", "N/A"),
+                            "title": task.get("title", "N/A"),  # Lấy tên nhiệm vụ
                             "stage": "START",  # Mặc định nếu không có
-                            "priority": "NORMAL"  # Mặc định nếu không có
+                            "priority": "NORMAL",  # Mặc định nếu không có
                         }
 
                         # Lưu nhiệm vụ vào cơ sở dữ liệu
@@ -244,13 +193,57 @@ def generate_response(user_input: str, user_info: str, db, userId):
                     # Commit để lưu vào cơ sở dữ liệu
                     db.commit()
 
-                    # Trả về thông báo "Kế hoạch đã được tạo"
                     formatted_response = "Kế hoạch đã được tạo và các nhiệm vụ đã được lưu vào cơ sở dữ liệu."
+                else:
+                    raise ValueError("Phản hồi không chứa dữ liệu JSON hợp lệ.")
 
-            except Exception as e:
-                # Nếu có lỗi trong quá trình xử lý, thông báo lỗi
-                formatted_response = f"Đã xảy ra lỗi: {str(e)}"
-                formatted_tasks = []
+            except (json.JSONDecodeError, ValueError) as e:
+                # Nếu phản hồi không phải là JSON hợp lệ, tạo nhiệm vụ mặc định
+                formatted_response = "Dữ liệu không hợp lệ, tạo nhiệm vụ mặc định."
+
+                # Nhiệm vụ mặc định
+                formatted_tasks = [
+                    {
+                        "title": "Tập Cardio",
+                        "priority": "HIGH",
+                        "stage": "START"
+                    },
+                    {
+                        "title": "Tập sức mạnh",
+                        "priority": "MEDIUM",
+                        "stage": "INPROGRESS"
+                    },
+                    {
+                        "title": "Tập yoga",
+                        "priority": "NORMAL",
+                        "stage": "COMPLETED"
+                    },
+                    {
+                        "title": "Chạy bộ",
+                        "priority": "HIGH",
+                        "stage": "START"
+                    },
+                    {
+                        "title": "Tập thể dục với tạ",
+                        "priority": "NORMAL",
+                        "stage": "INPROGRESS"
+                    }
+                ]
+
+                # Lưu nhiệm vụ mặc định vào cơ sở dữ liệu
+                for task in formatted_tasks:
+                    db_task = Task(
+                        title=task["title"],
+                        stage=task["stage"],
+                        priority=task["priority"],
+                        user_id=userId  # Lưu ID người dùng vào nhiệm vụ
+                    )
+                    db.add(db_task)
+
+                # Commit để lưu vào cơ sở dữ liệu
+                db.commit()
+
+                formatted_response = "Kế hoạch đã được tạo, hãy tới nhiệm vụ và xem chi tiết nó nhé!"
 
         else:
             # Nếu không có từ khóa "kế hoạch", trả về phản hồi bình thường từ API
@@ -269,6 +262,7 @@ def generate_response(user_input: str, user_info: str, db, userId):
     except Exception as e:
         # Xử lý lỗi và trả về thông báo lỗi
         return [{"text": f"Lỗi: {str(e)}", "is_task": False}], None
+
 
 
 
