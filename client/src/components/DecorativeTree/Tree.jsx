@@ -17,14 +17,14 @@ const Tree = () => {
               <h1>My Start</h1>
               <div className="flex">
                 <span>
-                  Today <br/> <small>4 Oders</small>
+                  Today <br/> <small>Ngày tháng</small>
                 </span>
                 <span>
-                  This Month <br/> <small>12 Oders</small>
+                  Total<br/> <small>12 menu</small>
                 </span>
               </div>
               <div className="flex link">
-                Go to my orders 
+                Go to my menu 
                 <BsArrowRightShort className='icon'/>
               </div>
             </div>

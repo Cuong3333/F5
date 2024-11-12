@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import Textbox from "../components/Textbox";
 import Button from "../components/Button";
@@ -67,6 +67,9 @@ const Login = () => {
         toast.success(result?.message || "Login successfully!"); // Kiểm tra nếu có message từ backend
 
         window.location.reload();
+
+        <Navigate to='/UserProfile' />
+
       } else {
         toast.error("Email or password failed");
       }

@@ -21,6 +21,8 @@ from .models.UserProfile import  UserProfile
 from .router.User import router as user_router
 from .router.task import router as task_router
 
+from sqlalchemy.orm import Session, joinedload
+
 from .utilities.oauth2 import get_curent_user
 from bs4 import BeautifulSoup
 
@@ -115,42 +117,13 @@ def suggest_exercise_activity():
         "- Tham gia lớp nhảy hoặc zumba: Vừa vận động vừa giải trí, tốt cho sức khỏe tim mạch."
     )
 
-def generate_response(user_input, web_contents, User_Profile):
-    """Generates response based on user input, web contents, and health data."""
-    health_keywords = ["sức khỏe", "tốt cho sức khỏe", "hoạt động thể thao", "tập luyện", "thể dục"]
 
-    # Handle health-related requests
-    if any(keyword in user_input.lower() for keyword in health_keywords):
-        exercise_activities = suggest_exercise_activity().split("\n- ")[1:]
-        response_messages = [{"text": activity, "is_task": True} for activity in exercise_activities]
-        history_text = "\n".join([msg["text"] for msg in response_messages])
-        save_history_text(history_text)
-        return response_messages, None
 
-    # Combine content from web and health data
-    combined_content = "\n\n".join([f"Nội dung từ {url}:\n{content}" for url, content in web_contents.items() if content])
-    health_info = (
-        f"Tôi tên là {User_Profile.name}.Năm nay tôi {User_Profile.age} tuổi. Cân nặng của tôi là {User_Profile.weight} kg, chiều cao là {User_Profile.height} cm, "
-        f"Mục tiêu của tôi đối với sức khỏe của tôi là {User_Profile.goal}. Giới tính của tôi là {User_Profile.gender} . Tôi đang có tiền sử bệnh {User_Profile.health_history}"
-        
-    ) if User_Profile else ""
 
-    prompt = f"{combined_content}\n\nCâu hỏi của người dùng: {user_input}"
 
-    # Call OpenAI API to generate a response
-    completion = openai.ChatCompletion.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": f"Bạn là một trợ lý sức khỏe của tôi. {health_info}"},
-            {"role": "user", "content": prompt}
-        ]
-    )
 
-    response_text = completion.choices[0].message['content']
-    formatted_response = response_text.replace("*", "").replace("\n", "<br>").replace("- ", "<br>- ")
 
-    save_history_text(f"User: {user_input}\nBot: {formatted_response.replace('<br>', '\n')}")
-    return [{"text": formatted_response, "is_task": False}], None
+
 
 # Audio conversion utility function
 def convert_audio_to_wav(input_file_path: str, output_file_path: str):
@@ -171,23 +144,181 @@ def convert_audio_to_wav(input_file_path: str, output_file_path: str):
         logger.error(f"Error converting audio: {e}")
         return False
 
-# Routes
+# ===================== Train AI CHAT-GBT
+import json
+
+
+def generate_response(user_input: str, user_info: str, db, userId):
+    """Tạo phản hồi từ người dùng với thông tin sức khỏe và lưu nhiệm vụ vào cơ sở dữ liệu."""
+
+    if not user_info:
+        return [{"text": "Không có thông tin sức khỏe để đưa ra lời khuyên.", "is_task": False}], None
+
+    try:
+        if "kế hoạch" in user_input.lower():
+            # Gọi API OpenAI để tạo kế hoạch ăn uống và tập luyện
+            completion = openai.ChatCompletion.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": f"Thông tin sức khỏe: {user_info}"},
+                    {"role": "user", "content": "Tạo 5 nhiệm vụ, mỗi nhiệm vụ phải có trường: title (tên kế hoạch tập luyện)"}
+                ]
+            )
+            response_text = completion['choices'][0]['message']['content']
+
+            # Phân tích phản hồi và giả sử phản hồi từ OpenAI API sẽ là một JSON chứa các nhiệm vụ
+            try:
+                # Giả sử phản hồi là một chuỗi JSON hợp lệ
+                try:
+                    tasks = json.loads(response_text)  # Cố gắng phân tích JSON
+                except json.JSONDecodeError as e:
+                    # Nếu phản hồi không phải là JSON hợp lệ, sử dụng nhiệm vụ mặc định và thông báo lỗi
+                    formatted_response = f"Sử dụng nhiệm vụ mặc định của tôi nhé!"
+                    formatted_tasks = [
+                        {
+                            "title": "Tập Cardio",
+                            "priority": "HIGH",
+                            "stage": "START"
+                        },
+                        {
+                            "title": "Tập sức mạnh",
+                            "priority": "MEDIUM",
+                            "stage": "INPROGRESS"
+                        },
+                        {
+                            "title": "Tập yoga",
+                            "priority": "NORMAL",
+                            "stage": "COMPLETED"
+                        },
+                        {
+                            "title": "Chạy bộ",
+                            "priority": "HIGH",
+                            "stage": "START"
+                        },
+                        {
+                            "title": "Tập thể dục với tạ",
+                            "priority": "NORMAL",
+                            "stage": "INPROGRESS"
+                        }
+                    ]
+                    
+                    # Lưu nhiệm vụ mặc định vào cơ sở dữ liệu
+                    for task in formatted_tasks:
+                        db_task = Task(
+                            title=task["title"],
+                            stage=task["stage"],
+                            priority=task["priority"],
+                            user_id=userId  # Lưu ID người dùng vào nhiệm vụ
+                        )
+                        db.add(db_task)
+
+                    # Commit để lưu vào cơ sở dữ liệu
+                    db.commit()
+
+                    # Trả về thông báo "Kế hoạch đã được tạo"
+                    formatted_response = "Kế hoạch đã được tạo, hãy tới nhiệm vụ và xem chi tiết nó nhé!"
+
+                    return [{"text": formatted_response, "is_task": False}], None
+
+                # Kiểm tra và chỉ lấy các trường cần thiết nếu phản hồi là JSON hợp lệ
+                if isinstance(tasks, list) and len(tasks) >= 5:
+                    formatted_tasks = []
+                    for task in tasks[:5]:  # Lấy tối đa 5 nhiệm vụ
+                        task_data = {
+                            "title": task.get("title", "N/A"),
+                            "stage": "START",  # Mặc định nếu không có
+                            "priority": "NORMAL"  # Mặc định nếu không có
+                        }
+
+                        # Lưu nhiệm vụ vào cơ sở dữ liệu
+                        db_task = Task(
+                            title=task_data["title"],
+                            stage=task_data["stage"],
+                            priority=task_data["priority"],
+                            user_id=userId  # Lưu ID người dùng vào nhiệm vụ
+                        )
+
+                        # Thêm đối tượng vào session của SQLAlchemy
+                        db.add(db_task)
+
+                    # Commit để lưu vào cơ sở dữ liệu
+                    db.commit()
+
+                    # Trả về thông báo "Kế hoạch đã được tạo"
+                    formatted_response = "Kế hoạch đã được tạo và các nhiệm vụ đã được lưu vào cơ sở dữ liệu."
+
+            except Exception as e:
+                # Nếu có lỗi trong quá trình xử lý, thông báo lỗi
+                formatted_response = f"Đã xảy ra lỗi: {str(e)}"
+                formatted_tasks = []
+
+        else:
+            # Nếu không có từ khóa "kế hoạch", trả về phản hồi bình thường từ API
+            completion = openai.ChatCompletion.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": f"Bạn trợ lý sức khỏe. Thông tin sức khỏe: {user_info}"},
+                    {"role": "user", "content": user_input}
+                ]
+            )
+            response_text = completion['choices'][0]['message']['content']
+            formatted_response = response_text.replace("*", "").replace("\n", "<br>").replace("- ", "<br>- ")
+
+        return [{"text": formatted_response, "is_task": False}], None
+
+    except Exception as e:
+        # Xử lý lỗi và trả về thông báo lỗi
+        return [{"text": f"Lỗi: {str(e)}", "is_task": False}], None
+
+
+
+
+
+
+def get_user_profile(user_id: int, db: Session) -> str:
+    """Truy vấn thông tin người dùng từ bảng UserProfile"""
+    profile = db.query(UserProfile).filter(UserProfile.user_id == user_id).first()
+    
+    if profile:
+        # Chuyển đổi thông tin thành chuỗi để gửi tới API ChatGPT
+        user_info = (
+            f"Name: {profile.name}\n"
+            f"Goal: {profile.goal}\n"
+            f"Gender: {profile.gender}\n"
+            f"Age: {profile.age}\n"
+            f"Height: {profile.height} cm\n"
+            f"Weight: {profile.weight} kg\n"
+            f"Health History: {profile.health_history}"
+        )
+        return user_info
+    return "User profile not found. Please update your profile."
+
+
 
 @app.post("/chat", response_class=JSONResponse)
 async def chat(user_input: str = Form(...), current_user: User = Depends(get_curent_user), db: Session = Depends(get_db)):
     """Handles user chat input."""
 
-    User_Profile = db.query(UserProfile).filter(UserProfile.user_id == current_user.id).first()
+    userId = current_user.id
 
-
-    web_contents = store_web_contents()
+    user_info = get_user_profile(userId, db)
     
-    if not web_contents:
-        return JSONResponse({"error": "Failed to fetch web contents."}, status_code=500)
+    
+    # Nếu không có thông tin người dùng, trả về lỗi
+    if not user_info:
+        return JSONResponse({"error": "User profile not found. Please update your profile."}, status_code=400)
 
-    response_messages, _ = generate_response(user_input, web_contents, User_Profile)
+    response_messages, _ = generate_response(user_input, user_info, db, userId)
     
     return {"messages": response_messages}
+
+
+
+
+
+
+
+
 
 @app.post("/chat-voice", response_class=JSONResponse)
 async def chat_voice(voice: UploadFile = File(...)):

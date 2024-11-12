@@ -6,6 +6,7 @@ import '../css/ChatBox.css';
 
 import Tree from '../components/DecorativeTree/Tree';
 import Tasks from './Task';
+import { BsQuestionOctagon } from 'react-icons/bs';
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -121,10 +122,9 @@ const ChatBox = () => {
 
   return (
     <div className="flex flex-col sm:flex-col md:flex-row h-[800px] w-full md:w-[1200px]">
-      <div className="w-full sm:w-full md:w-[1100px] bg-gray-200 overflow-auto">
+      <div className="w-full sm:w-full md:w-[1100px] overflow-auto">
         <div className="chatbox">
-          <header>ChatBot</header>
-          
+          <header className='bg-gradient-to-b from-[#9ccf98] to-[#baf1ba]'>Ask AI</header>
           <div className="messages">
             {messages.map((msg, index) => (
               <div key={index} className={`message ${msg.sender}`}>
@@ -164,15 +164,43 @@ const ChatBox = () => {
         </div>
       </div>
 
-      <div className="w-full sm:w-full md:w-1/2 flex flex-col bg-blue-300">
-        <div className="h-[300px] w-full sm:w-full md:max-w-[350px] md:mx-auto">
+      <div className="w-full sm:w-full md:w-1/2 flex flex-col">
+        <div className="h-[350px] w-full sm:w-full md:max-w-[350px] md:mx-auto">
           <Tree />
         </div>
 
-        <div className="flex-grow bg-green-200 overflow-y-auto tasks-container" style={{ maxHeight: '500px' }}>
-            <h1>Tasks</h1>
-            <Tasks triggerRefetch={triggerRefetch} isListView={true} />
+        
+
+            {/* <h1>Tasks</h1>
+              <Tasks triggerRefetch={triggerRefetch} isListView={true} /> */}
+
+        <div className="p-4 h-[400px]">
+          {/* Container chính với flex và shadow */}
+          <div className="flex items-center bg-white shadow-lg rounded-lg p-6 space-x-4">
+            {/* Icon với màu và kích thước tùy chỉnh */}
+            <BsQuestionOctagon className="text-[hsl(94,77%,39%)] text-2xl" />
+            
+            {/* Phần nội dung */}
+            <div className="flex flex-col items-start">
+              {/* Hai hình tròn màu khác nhau */}
+              <div className="w-4 h-4 bg-[hsl(94,77%,39%)] rounded-full"></div>
+              <div className="w-4 h-4 bg-[hsl(96,75%,89%)] rounded-full"></div>
+
+              {/* Tiêu đề */}
+              <h3 className="text-lg font-semibold text-[hsl(0,0%,18%)] mt-2">Help Center</h3>
+              
+              {/* Mô tả */}
+              <p className="text-sm text-[rgb(190,190,190)]">Connect us from for more question.</p>
+              
+              {/* Nút */}
+              <button className="bg-[hsl(94,77%,39%)] text-white py-2 px-4 rounded mt-3 hover:bg-[hsl(93,75%,76%)]">
+                Go to help center
+              </button>
+            </div>
+          </div>
         </div>
+
+
 
 
       </div>

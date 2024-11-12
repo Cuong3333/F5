@@ -40,7 +40,7 @@ function Layout() {
 
   return user ? (
     <div className='w-full h-screen flex flex-col md:flex-row'>
-      <div className='w-1/5 h-screen bg-gradient-to-b from-[#c1e6bd] to-[#f0f3f0] sticky top-0 hidden md:block'>
+      <div className='w-1/5 h-screen bg-gradient-to-b from-[#ade1a8] to-[#f0f3f0] sticky top-0 hidden md:block'>
         {/* thanh điều hướng bên trái */}
         <Sidebar /> 
       </div>

@@ -60,7 +60,9 @@ const ButtonClickSnow = () => {
     <div>
       <div>
 
-        <button className="bg-transparent text-primaryColor py-2 px-6 rounded-full font-normal transition-all duration-300 transform hover:scale-105 hover:bg-[#b2f7ef] hover:border-[#b2f7ef] hover:text-black border-2 border-[#4CAF50]">
+        <button className="bg-transparent text-primaryColor py-2 px-6 rounded-full font-normal transition-all duration-300 transform hover:scale-105 hover:bg-[#b2f7ef] hover:border-[#b2f7ef] hover:text-black border-2 border-[#4CAF50]"
+          onClick={handleButtonClick}
+        >
           {isConfetti ? 'Stop' : 'Yay'}
         </button>
 

@@ -25,8 +25,7 @@
 /* Container tổng của ChatBox */
 .chatbox {
   width: 100%;
-  max-width: 1100px; /* Giới hạn kích thước tối đa */
-  height: 750px;
+  height: 650px;
   background: var(--whiteColor);
   border-radius: var(--radius);
   box-shadow: 0 4px 8px var(--shadowColor);
@@ -35,7 +34,7 @@
   overflow: hidden;
   font-family: Arial, sans-serif;
   color: var(--textColor);
-  margin: 20px auto; /* Căn giữa ngang */
+  margin: 0; /* Căn giữa ngang */
   position: relative;
   left: 0;
   top: 0;
@@ -43,7 +42,7 @@
 
 /* Header của ChatBox */
 .chatbox header {
-  background: var(--primaryColor);
+  /* background: var(--primaryColor); */
   padding: var(--padding);
   text-align: center;
   color: var(--whiteColor);
