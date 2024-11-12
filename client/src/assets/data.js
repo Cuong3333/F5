@@ -3,10 +3,10 @@ export const summary = {
   last10Task: [
     {
       _id: "65c5f12ab5204a81bde866a9",
-      title: "Test task",
+      title: "Chạy bộ vào buổi sáng",
       date: "2024-02-09T00:00:00.000Z",
       priority: "high",
-      stage: "todo",
+      stage: "start",
       assets: [
         "https://firebasestorage.googleapis.com/v0/b/taskmanager-557d7.appspot.com/o/1707471138863original-a005132062ca5bafc505c4c74f0e1865.jpg?alt=media&token=55f909f2-7f05-42f3-af4f-dc7f87cdea1d",
         "https://firebasestorage.googleapis.com/v0/b/taskmanager-557d7.appspot.com/o/1707471144712PsZch9E1_400x400.jpg?alt=media&token=7ce62c7e-c240-4032-83c6-bb6c9cdc0d4b",
@@ -14,33 +14,20 @@ export const summary = {
       team: [
         {
           _id: "65c202d4aa62f32ffd1303cc",
-          name: "Codewave Asante",
+          name: "Cuong",
           title: "Administrator",
           role: "Admin",
           email: "admin@gmail.com",
         },
-        {
-          _id: "65c30b96e639681a13def0b5",
-          name: "Jane Smith",
-          title: "Product Manager",
-          role: "Manager",
-          email: "jane.smith@example.com",
-        },
-        {
-          _id: "65c317360fd860f958baa08e",
-          name: "Alex Johnson",
-          title: "UX Designer",
-          role: "Designer",
-          email: "alex.johnson@example.com",
-        },
+        
       ],
       isTrashed: false,
       activities: [],
       subTasks: [
         {
-          title: "Task manager youtube tutorial",
+          title: "Chuẩn bị đồ",
           date: "2024-02-09T00:00:00.000Z",
-          tag: "tutorial",
+          tag: "chay",
           _id: "65c5f153b5204a81bde866c8",
         },
       ],
@@ -58,17 +45,17 @@ export const summary = {
       team: [
         {
           _id: "65c317360fd860f958baa08e",
-          name: "Alex Johnson",
-          title: "UX Designer",
-          role: "Designer",
-          email: "alex.johnson@example.com",
+          name: "Dao van Sang",
+          title: "F5",
+          role: "user",
+          email: "sang@example.com",
         },
         {
           _id: "65c3176a0fd860f958baa099",
-          name: "Emily Wilson",
-          title: "Data Analyst",
-          role: "Analyst",
-          email: "emily.wilson@example.com",
+          name: "Nguyen biên",
+          title: "F5",
+          role: "chay",
+          email: "bien@example.com",
         },
       ],
       isTrashed: false,
@@ -87,13 +74,7 @@ export const summary = {
           by: "65c202d4aa62f32ffd1303cc",
           _id: "65c5f19eb5204a81bde866dd",
         },
-        {
-          type: "bug",
-          activity: "bug found",
-          date: "2024-02-09T09:16:56.623Z",
-          by: "65c202d4aa62f32ffd1303cc",
-          _id: "65c5f1abb5204a81bde866eb",
-        },
+        
       ],
       subTasks: [
         {
@@ -597,7 +578,7 @@ export const chartData = [
 export const tasks = [
   {
     _id: "65c5f12ab5204a81bde866a9",
-    title: "Test task",
+    title: "Chạy bộ vào buổi sáng",
     date: "2024-02-09T00:00:00.000Z",
     priority: "high",
     stage: "todo",
@@ -608,28 +589,23 @@ export const tasks = [
     team: [
       {
         _id: "65c202d4aa62f32ffd1303cc",
-        name: "Codewave Asante",
-        title: "Administrator",
-        email: "admin@gmail.com",
+        name: "Dao van sang",
+        title: "F5",
+        email: "sa@gmail.com",
       },
       {
         _id: "65c30b96e639681a13def0b5",
-        name: "Jane Smith",
-        title: "Product Manager",
+        name: "Bien",
+        title: "F5",
         email: "jane.smith@example.com",
       },
-      {
-        _id: "65c317360fd860f958baa08e",
-        name: "Alex Johnson",
-        title: "UX Designer",
-        email: "alex.johnson@example.com",
-      },
+      
     ],
     isTrashed: false,
     activities: [],
     subTasks: [
       {
-        title: "Task manager youtube tutorial",
+        title: "CHuẩn bị đồ",
         date: "2024-02-09T00:00:00.000Z",
         tag: "tutorial",
         _id: "65c5f153b5204a81bde866c8",
@@ -641,7 +617,7 @@ export const tasks = [
   },
   {
     _id: "65c5d547660756f6fd453a7a",
-    title: "Duplicate - Duplicate - Review Code Changes",
+    title: "Khởi động cá nhân",
     date: "2024-02-09T00:00:00.000Z",
     priority: "medium",
     stage: "in progress",

@@ -24,6 +24,7 @@ class User(Base):
     # Quan hệ 1-n với Task (1 User có thể có nhiều nhiệm vụ)
     tasks = relationship("Task", back_populates="user")
 
+    menus = relationship("Menu", back_populates="user")
 
     # Quan hệ với bảng UserProfile
     profile = relationship("UserProfile", back_populates="user", uselist=False)  # Thiết lập quan hệ 1-1

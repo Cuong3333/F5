@@ -117,9 +117,21 @@ const MobileSidebar = () => {
 
 function App() {
   return (
-    <main className='w-full min-h-screen bg-gradient-to-b from-[#c8e2c5] to-[#f0f3f0] '>
+    <>
+      {/* Route riêng cho trang Home */}
       <Routes>
-        <Route element={<Layout />}>
+        <Route path='/home' element={<Home />} />
+      </Routes>
+
+      {/* Các route khác sẽ nằm trong thẻ <main> với CSS riêng */}
+      <Routes>
+        <Route
+          element={
+            <main className='w-full min-h-screen bg-gradient-to-b from-[#c8e2c5] to-[#f0f3f0]'>
+              <Layout />
+            </main>
+          }
+        >
           <Route index path='/' element={<Navigate to='/chatbot' />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/tasks' element={<Tasks />} />
@@ -128,21 +140,25 @@ function App() {
           <Route path='/todo/:status' element={<Tasks />} />
           <Route path='/team' element={<Users />} />
           <Route path='/trashed' element={<Trash />} />
-          <Route path='/trashed' element={<Trash />} />
           <Route path='/chatbot' element={<ChatBot />} />
           <Route path='/task/:id' element={<TaskDetails />} />
+          <Route path='/chatbot' element={<ChatBot />} />
+
         </Route>
 
+        {/* Các route khác */}
         <Route path='/log-in' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/home' element={<Home />} />
         <Route path='/UserProfile' element={<UserProfile />} />
       </Routes>
 
-      {/* thư viện để thông báo toàn trang web */}
+      {/* Thư viện để thông báo toàn trang web */}
       <Toaster richColors />
-    </main>
+    </>
   );
 }
+
+
+
 
 export default App

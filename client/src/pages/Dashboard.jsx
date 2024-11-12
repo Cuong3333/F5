@@ -2,8 +2,11 @@ import moment from "moment"; // thư viện ngày tháng
 import { summary } from "../assets/data"; // giả lập api
 import clsx from "clsx"; // viết logic trong class
 
-// components
-import { Chart } from "../components/Chart"; // sử dụng biểu đồ
+// components chart
+import { ChartOne } from "../components/Chart/ChartOne"; // sử dụng biểu đồ
+import { ChartTwo } from "../components/Chart/ChatTwo"; // sử dụng biểu đồ
+import { CircleChart } from "../components/Chart/CircleChart"; // sử dụng biểu đồ
+//compo
 import UserInfo from "../components/UserInfo";
 
 // tiện ích
@@ -23,14 +26,15 @@ import {
 //api 
 import { useGetDashboardStartsQuery } from "../redux/slices/api/taskApiSlice";
 import Loading from '../components/Loader'
+import TaskChart from "../components/Chart/ColumnChart";
 
 //Hiển thị bảng icon các nhiệm vụ với các cột như tiêu đề nhiệm vụ, độ ưu tiên, đội ngũ và ngày tạo.
 const TaskTable = ({ tasks }) => {
 
   const ICONS = {
-    high: <MdKeyboardDoubleArrowUp />,
-    medium: <MdKeyboardArrowUp />,
-    low: <MdKeyboardArrowDown />,
+    HIGH: <MdKeyboardDoubleArrowUp />,
+    MEDIUM: <MdKeyboardArrowUp />,
+    MORMAL: <MdKeyboardArrowDown />,
   };
 
   // TableHeader là một component React có tác dụng hiển thị phần tiêu đề của một bảng (table header). Đây là phần tiêu đề mà người dùng sẽ thấy khi xem bảng chứa các thông tin về nhiệm vụ (tasks)
@@ -39,8 +43,8 @@ const TaskTable = ({ tasks }) => {
       <tr className='text-black text-left'>
         <th className='py-2'>Task Title</th>
         <th className='py-2'>Priority</th>
-        <th className='py-2'>Team</th>
-        <th className='py-2 hidden md:block'>Created At</th>
+        <th className='py-2'>Evaluate</th>
+        <th className='py-2 hidden md:block'>Achievement</th>
       </tr>
     </thead>
   );
@@ -123,9 +127,9 @@ const UserTable = ({ users }) => {
   const TableHeader = () => (
     <thead className='border-b border-gray-300 '>
       <tr className='text-black  text-left'>
-        <th className='py-2'>Full Name</th>
+        <th className='py-2'>Evaluate</th>
         <th className='py-2'>Status</th>
-        <th className='py-2'>Created At</th>
+        <th className='py-2'>Achievement</th>
       </tr>
     </thead>
   );
@@ -139,12 +143,12 @@ const UserTable = ({ users }) => {
         <div className='flex items-center gap-3'>
           <div className='w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-violet-700'>
             {/* lấy chữ cái đầu tiên của tên người dung */}
-            <span className='text-center'>{getInitials(user?.name)}</span>
+            {/* <span className='text-center'>{getInitials(user?.name)}</span> */}
           </div>
 
           <div>
-            <p> {user.name}</p>
-            <span className='text-xs text-black'>{user?.role}</span>
+            {/* <p> {user.name}</p>
+            <span className='text-xs text-black'>{user?.role}</span> */}
           </div>
         </div>
       </td>
@@ -201,18 +205,12 @@ const Dashboard = () => {
   
 
   // Tính tổng số nhiệm vụ hoàn thành (complete)
-  const tasks_complete = tasksData?.filter(task => task.stage === 'completed').length || 0;
+  const tasks_complete = tasksData?.filter(task => task.stage === 'COMPLETED').length || 0;
 
 
-  const tasks_inProgress = tasksData?.filter(task => task.stage === 'in progress').length || 0;
+  const tasks_inProgress = tasksData?.filter(task => task.stage === 'IN PROGRESS').length || 0;
 
-  const tasks_start = tasksData?.filter(task => task.stage === 'start').length || 0;
-
-  // console.log(totalss);
-
-  console.log(tasksData?.sub_tasks);  // Kiểm tra độ dài của tasks
-
-  const totals = summary.tasks;
+  const tasks_start = tasksData?.filter(task => task.stage === 'START').length || 0;
 
 
   // lẩy ra tổng nhiệm vụ và thông tin cần thiết cho top dashboard
@@ -233,7 +231,7 @@ const Dashboard = () => {
     },
     {
       _id: "3",
-      label: "TASK IN PROGRESS ",
+      label: "PROGRESS ",
       total: tasks_inProgress || 0, // tổng nhiệm vụ đang làm
       icon: <LuClipboardEdit />,
       bg: "bg-[#f59e0b]",
@@ -280,14 +278,47 @@ const Dashboard = () => {
         ))}
       </div>
 
+
+
+
       {/* Phần biểu đồ của Dashboard */}
       <div className='w-full bg-white my-16 p-4 rounded shadow-sm'>
         <h4 className='text-xl text-gray-600 font-semibold'>
           Chart by Priority
         </h4>
         {/* sử dụng component biểu đồ ở đây */}
-        <Chart />
+        <ChartOne />
       </div>
+
+      <div className='w-full bg-white my-16 p-4 rounded shadow-sm'>
+        <h4 className='text-xl text-gray-600 font-semibold'>
+          Chart by Priority
+        </h4>
+        {/* sử dụng component biểu đồ ở đây */}
+        <ChartTwo />
+      </div>
+
+      <div className='w-full bg-white my-16 p-4 rounded shadow-sm'>
+        <h4 className='text-xl text-gray-600 font-semibold'>
+          Chart by Priority
+        </h4>
+        {/* sử dụng component biểu đồ ở đây */}
+        <TaskChart />
+      </div>
+      
+      <div className='w-full bg-white my-16 p-4 rounded shadow-sm'>
+        <h4 className='text-xl text-gray-600 font-semibold'>
+          Chart by Priority
+        </h4>
+        {/* sử dụng component biểu đồ ở đây */}
+        <CircleChart />
+      </div>
+
+
+
+
+
+
 
       {/* Phần dưới của dashboard */}
       <div className='w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8'>

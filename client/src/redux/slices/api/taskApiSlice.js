@@ -41,7 +41,12 @@ export const taskApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: ['Task'],  // Làm mới dữ liệu task sau khi xóa
         }),
     }),
+    
     tagTypes: ['Task'],  // Định nghĩa tag "Task"
 });
+
+
+
+
 
 export const { useGetDashboardStartsQuery, useCreateTaskMutation, useUpdateTaskMutation, useDeleteTaskMutation } = taskApiSlice;

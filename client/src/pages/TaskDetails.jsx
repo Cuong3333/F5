@@ -20,6 +20,8 @@ import { PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
 import Loading from "../components/Loader";
 import Button from "../components/Button";
 
+
+
 const assets = [
   "https://images.pexels.com/photos/2418664/pexels-photo-2418664.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   "https://images.pexels.com/photos/8797307/pexels-photo-8797307.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -86,12 +88,14 @@ const act_types = [
   "Assigned",
 ];
 
+
+
 const TaskDetails = () => {
 
   const { id } = useParams();
 
   const [selected, setSelected] = useState(0);
-  const task = tasks[1];
+  const task = tasks[0];
 
   return (
     <div className='w-full flex flex-col gap-3 mb-4 overflow-y-hidden'>

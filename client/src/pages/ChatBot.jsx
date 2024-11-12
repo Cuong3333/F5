@@ -175,29 +175,7 @@ const ChatBox = () => {
               <Tasks triggerRefetch={triggerRefetch} isListView={true} /> */}
 
         <div className="p-4 h-[400px]">
-          {/* Container chính với flex và shadow */}
-          <div className="flex items-center bg-white shadow-lg rounded-lg p-6 space-x-4">
-            {/* Icon với màu và kích thước tùy chỉnh */}
-            <BsQuestionOctagon className="text-[hsl(94,77%,39%)] text-2xl" />
-            
-            {/* Phần nội dung */}
-            <div className="flex flex-col items-start">
-              {/* Hai hình tròn màu khác nhau */}
-              <div className="w-4 h-4 bg-[hsl(94,77%,39%)] rounded-full"></div>
-              <div className="w-4 h-4 bg-[hsl(96,75%,89%)] rounded-full"></div>
-
-              {/* Tiêu đề */}
-              <h3 className="text-lg font-semibold text-[hsl(0,0%,18%)] mt-2">Help Center</h3>
-              
-              {/* Mô tả */}
-              <p className="text-sm text-[rgb(190,190,190)]">Connect us from for more question.</p>
-              
-              {/* Nút */}
-              <button className="bg-[hsl(94,77%,39%)] text-white py-2 px-4 rounded mt-3 hover:bg-[hsl(93,75%,76%)]">
-                Go to help center
-              </button>
-            </div>
-          </div>
+          
         </div>
 
 

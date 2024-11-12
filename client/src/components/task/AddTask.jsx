@@ -16,7 +16,7 @@ import { useCreateTaskMutation, useUpdateTaskMutation } from "../../redux/slices
 import { toast } from "sonner";
 
 const LISTS = ["START", "IN PROGRESS", "COMPLETED"];
-const PRIORIRY = ["HIGH", "MEDIUM", "NORMAL", "LOW"];
+const PRIORIRY = ["HIGH", "MEDIUM"];
 
 
 
@@ -161,7 +161,7 @@ const AddTask = ({ open, setOpen, task }) => {
                 <Button
                   label='Submit'
                   type='submit'
-                  className='bg-blue-600 px-8 text-sm font-semibold text-white hover:bg-blue-700  sm:w-auto'
+                  className='bg-gradient-to-r from-[#3f9772] to-[#a1dea1] px-8 text-sm font-semibold text-white hover:bg-blue-700  sm:w-auto'
                 />
               )}
 

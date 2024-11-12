@@ -1,6 +1,7 @@
 import clsx from "clsx";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { getRandomValue } from '../utils/index';
 // tiện ích
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../utils";
 // compoment cha
@@ -21,14 +22,37 @@ import {
 } from "react-icons/md";
 
 const ICONS = {
-  high: <MdKeyboardDoubleArrowUp />,
-  medium: <MdKeyboardArrowUp />,
-  low: <MdKeyboardArrowDown />,
+  'HIGH': <MdKeyboardDoubleArrowUp />,
+  'MEDIUM': <MdKeyboardArrowUp />,
+  'NORMAL': <MdKeyboardArrowDown />,
 };
+
 
 const TaskCard = ({ task }) => {
   const { user } = useSelector((state) => state.auth); // vào store redux lấy thông tin người dùng
   const [open, setOpen] = useState(false);
+  const [randomValue, setRandomValue] = useState('');
+
+  const priority_data = {
+    normal: "NORMAL",
+    medium: "MEDIUM",
+    high: "HIGH"
+  }
+  
+  
+
+    useEffect(() => {
+      // Chỉ lấy giá trị ngẫu nhiên khi lần đầu render
+      if ( task?.priority === "NORMAL") {
+        const value = getRandomValue(priority_data);
+        setRandomValue(value);
+    }
+    }, []); // Chỉ chạy một lần khi component được render lần đầu
+
+
+    // Xử lý className với điều kiện
+  const priorityClass = task?.priority === "NORMAL" ? randomValue : task?.priority;
+
 
   return (
     <>
@@ -38,13 +62,13 @@ const TaskCard = ({ task }) => {
             className={clsx(
               "flex flex-1 gap-1 items-center text-sm font-medium",
               // màu cho mức độ ưu tiên
-              PRIOTITYSTYELS[task?.priority]
+              PRIOTITYSTYELS[priorityClass]
             )}
           >
             {/*Lấy mức độ ưu tiên trong api fake - dựa trên mức độ ưu tiên hiển thị icon đã setup*/}
-            <span className='text-lg'>{ICONS[task?.priority]}</span>
+            <span className='text-lg'>{ICONS[priorityClass]}</span>
             {/* viêt hóa tên mức độ ưu tiên trong api faker  */}
-            <span className='uppercase'>{task?.priority} Priority</span>
+            <span className='uppercase'>{priorityClass} Priority</span>
           </div>
           
           {/* thông tin người dung sem có phải là admin không phải thì sử dụng TaskDialog */}
@@ -60,11 +84,11 @@ const TaskCard = ({ task }) => {
               className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
             />
             {/* đi vào api fake lấy tên để hiện thị */}
-            <h4 className='line-clamp-1 text-black'>{task?.title}</h4>
+            <h4 className='line-clamp-1 text-black uppercase'>{task?.title}</h4>
           </div>
           <span className='text-sm text-gray-600'>
           {/* chuyển đổi một ngày như 2024-11-07T15:30:00Z thành định dạng dễ đọc như 07/11/2024 hoặc November 7, 2024. */}
-            {formatDate(new Date(task?.date))} 
+            {task.time} 
           </span>
         </>
 

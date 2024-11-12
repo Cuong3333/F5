@@ -29,7 +29,8 @@ async def get_user_tasks(
             raise HTTPException(status_code=404, detail="No tasks found for this user")
 
         return {
-            "tasks": tasks
+            "tasks": tasks,
+            "message": "Wellcome to WellG"
         }
 
     except Exception as e:

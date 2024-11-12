@@ -40,17 +40,17 @@ export function getInitials(fullName) {
 // Định nghĩa các lớp CSS tùy theo mức độ ưu tiên của nhiệm vụ (high, medium, low).
 // Sử dụng trong bảng hoặc danh sách để tô màu độ ưu tiên của nhiệm vụ. Ví dụ, nhiệm vụ với mức độ ưu tiên cao sẽ có màu chữ đỏ.
 export const PRIOTITYSTYELS = {
-  high: "text-red-600",
-  medium: "text-yellow-600",
-  low: "text-blue-600",
+  'HIGH': "text-red-600",
+  'MEDIUM': "text-yellow-600",
+  'NORMAL': "text-blue-600",
 };
 
 // Định nghĩa các màu nền tùy theo trạng thái nhiệm vụ (todo, in progress, completed).
 // Giúp dễ dàng phân biệt các nhiệm vụ dựa trên trạng thái, bằng cách thay đổi màu nền.
 export const TASK_TYPE = {
-  start: "bg-blue-600",
-  "in progress": "bg-yellow-600",
-  completed: "bg-green-600",
+  'START': "bg-green-500",
+  'IN PROGRESS': "bg-yellow-400",
+  'COMPLETED': "bg-red-500",
 };
 
 // Mảng này chứa các màu nền sử dụng cho các thành viên trong nhóm hoặc các đối tượng khác.
@@ -60,3 +60,9 @@ export const BGS = [
   "bg-red-600",
   "bg-green-600",
 ];
+
+export const getRandomValue = (obj) => {
+  const values = Object.values(obj); // Lấy mảng các giá trị của object
+  const randomIndex = Math.floor(Math.random() * values.length); // Chọn ngẫu nhiên một index
+  return values[randomIndex]; // Trả về giá trị tại index ngẫu nhiên
+};

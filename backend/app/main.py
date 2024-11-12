@@ -20,6 +20,7 @@ from .models.task import Task
 from .models.UserProfile import  UserProfile
 from .router.User import router as user_router
 from .router.task import router as task_router
+from .router.menu import router as menu_router
 
 from sqlalchemy.orm import Session, joinedload
 
@@ -54,6 +55,7 @@ Base.metadata.create_all(bind=engine)
 
 app.include_router(user_router)
 app.include_router(task_router)
+app.include_router(menu_router)
 
 # Logging configuration
 logging.basicConfig(
