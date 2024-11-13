@@ -8,16 +8,16 @@ class UserProfile(Base):
     __tablename__ = "user_profiles"
     
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)  # Tham chiếu đến bảng User
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)  # Khoá ngoại đến bảng User
     
-    # Các cột lưu trữ thông tin chi tiết
-    name = Column(String, nullable=True)  # Tên người dùng
-    goal = Column(String, nullable=True)  # Mục tiêu người dùng
-    gender = Column(String, nullable=True)  # Giới tính người dùng (Nam hoặc Nữ)
-    age = Column(Integer, nullable=True)  # Tuổi người dùng
-    height = Column(Integer, nullable=True)  # Chiều cao người dùng (cm)
-    weight = Column(Integer, nullable=True)  # Cân nặng người dùng (kg)
-    health_history = Column(String, nullable=True)  # Tiền sử bệnh của người dùng
+    # Các cột khác
+    name = Column(String, nullable=True)
+    goal = Column(String, nullable=True)
+    gender = Column(String, nullable=True)
+    age = Column(Integer, nullable=True)
+    height = Column(Integer, nullable=True)
+    weight = Column(Integer, nullable=True)
+    health_history = Column(String, nullable=True)
     
-    # Thiết lập quan hệ 1-1 với User
+    # Quan hệ với User
     user = relationship("User", back_populates="profile")

@@ -1,6 +1,7 @@
 // src/pages/UserProfile.jsx
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '../css/UserProfile.module.css';
 
 const questions = [
@@ -14,6 +15,7 @@ const questions = [
 ];
 
 const UserProfile = () => {
+    const navigate = useNavigate();  // Khai báo navigate
     const [step, setStep] = useState(0);
     const [userData, setUserData] = useState({
         name: '',
@@ -55,27 +57,39 @@ const UserProfile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const userId = 1; // Replace with dynamic user ID if needed
-            const response = await fetch(`http://localhost:8000/save-user-profile/${userId}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(userData),
-            });
 
-            if (!response.ok) {
-                throw new Error("Lưu thông tin thất bại.");
-            }
-
-            const result = await response.json();
-            alert('Thông tin đã được lưu thành công!');
+            const token = localStorage.getItem("access_token");
+            if (!token) {
+              alert("Không tìm thấy token. Vui lòng đăng nhập lại.");
+              return;
+            }      
+          const response = await fetch(`http://localhost:8000/save-user-profile`, {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}` // Thêm token vào header
+            },
+            body: JSON.stringify(userData), // Dữ liệu gửi đi
+          });
+      
+          if (!response.ok) {
+            throw new Error("Lưu thông tin thất bại.");
+          }
+      
+          const result = await response.json();
+          alert('Thông tin đã được lưu thành công!');
+          
+          // Sau khi lưu thành công, điều hướng đến chatbot
+          navigate("/chatbot");
+          
         } catch (error) {
-            alert('Đã xảy ra lỗi khi lưu thông tin.');
-            console.error(error);
+          alert('Đã xảy ra lỗi khi lưu thông tin.');
+          console.error(error);
         }
-    };
-
-    const currentQuestion = questions[step];
-
+      };
+      
+      const currentQuestion = questions[step];
+      
     return (
         <div className={styles["user-profile-wizard"]}>
             <h2>Thông tin người dùng</h2>

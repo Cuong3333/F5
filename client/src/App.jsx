@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import { Fragment, useRef } from "react";
 import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"; // sử dụng để đi vào store lấy trạng thái xác thực thông tin người dùng
+import './index.css'
 //pages
 import Login from "./pages/Login.jsx"
 import Dashboard from "./pages/Dashboard"
@@ -12,10 +13,10 @@ import Trash from './pages/Trash';
 import TaskDetails from "./pages/TaskDetails";
 import Users from "./pages/Users";
 import Register from "./pages/Register";
-import Home from "./pages/Home";
 import ChatBot from "./pages/ChatBot";
 import UserProfile from "./pages/UserProfile" ;
-
+// import HomePage from "./pages/HomePage.jsx";
+ 
 //components
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
@@ -30,10 +31,7 @@ import { setOpenSidebar } from "./redux/slices/authSlice";
 // layoout cho trang khi đăng nhập thành công
 function Layout() {
 
-  // hook từ redux truy cập vào trạng thái redux store bên trong 1 compoent ko phải sử dụng pops
-  //  đang truy cập vào phần auth trong Redux store. Đây có thể là một reducer hoặc một phần của trạng thái trong store, nơi thông tin liên quan đến quá trình xác thực (như thông tin người dùng, trạng thái đăng nhập, token, v.v.) được lưu trữ.
-  //giúp bạn lấy thông tin người dùng từ phần auth trong trạng thái Redux store. Sau khi thực thi, user sẽ chứa thông tin người dùng nếu có (chẳng hạn như khi người dùng đã đăng nhập).
-  //Câu lệnh này rất hữu ích để kiểm tra trạng thái đăng nhập của người dùng, ví dụ như chuyển hướng người dùng đến trang dashboard nếu họ đã đăng nhập thành công.
+  
   const { user } = useSelector((state) => state.auth);
 
   const location = useLocation();
@@ -117,11 +115,13 @@ const MobileSidebar = () => {
 
 function App() {
   return (
+ 
     <main className='w-full min-h-screen bg-gradient-to-b from-[#c8e2c5] to-[#f0f3f0] '>
       <Routes>
         <Route element={<Layout />}>
-          <Route index path='/' element={<Navigate to='/chatbot' />} />
+          {/* <Route index path='/' element={<Navigate to='/chatbot' />} /> */}
           <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/chatbot' element={<ChatBot />} />
           <Route path='/tasks' element={<Tasks />} />
           <Route path='/completed/:status' element={<Tasks />} />
           <Route path='/in-progress/:status' element={<Tasks />} />
@@ -131,17 +131,19 @@ function App() {
           <Route path='/trashed' element={<Trash />} />
           <Route path='/chatbot' element={<ChatBot />} />
           <Route path='/task/:id' element={<TaskDetails />} />
+          <Route path='/UserProfile' element={<UserProfile />} />
         </Route>
 
         <Route path='/log-in' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/UserProfile' element={<UserProfile />} />
+        {/* <Route index path='/' element={<HomePage to='/home' />} /> */}
+        
       </Routes>
 
       {/* thư viện để thông báo toàn trang web */}
       <Toaster richColors />
     </main>
+  
   );
 }
 

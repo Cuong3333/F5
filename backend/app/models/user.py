@@ -25,5 +25,5 @@ class User(Base):
     tasks = relationship("Task", back_populates="user")
 
 
-    # Quan hệ với bảng UserProfile
-    profile = relationship("UserProfile", back_populates="user", uselist=False)  # Thiết lập quan hệ 1-1
+ # Quan hệ 1-1 với UserProfile
+    profile = relationship("UserProfile", back_populates="user", uselist=False)
